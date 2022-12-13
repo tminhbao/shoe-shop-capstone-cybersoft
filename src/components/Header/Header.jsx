@@ -1,7 +1,22 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
-export default function Header() {
+// SCSS
+import '../../assets/sass/components/header/header.scss'
+import { getSearch } from '../../redux/reducers/productReducer';
+
+const Header = () => {
+  const [styleInput, setStyleInput] = useState('d-none')
+  const [styleButton, setStyleButton] = useState('')
+  const dispatch = useDispatch()
+
+  const handleChange = (e)=>{
+    const value = e.target.value;
+    const action = getSearch(value)
+    dispatch(action)
+  }
+
   return (
     <header>
       <nav className="navbar navbar-expand-sm navbar-dark bg-black">
@@ -12,11 +27,21 @@ export default function Header() {
           <NavLink className="navbar-brand" to='/'><img src="../image/image 3 (1).png" alt="" /></NavLink>
           <div className="d-flex">
             <div className="d-sm-inline d-none">
-              <form className="d-flex my-2 my-lg-0">
-                <input className="form-control me-sm-2 bg-black text-light" type="text" placeholder="Search" />
-                <button className="btn text-light"><i className="fa fa-search" /></button>
+              <div className="d-flex my-2 my-lg-0">
+                <div className="search d-flex">
+                  <button className={`${styleButton} btn text-light`} onClick={() => {
+                    setStyleInput("form-control ps-5 bg-black text-light w-100")
+                    setStyleButton('button-search')
+                  }}><i className="fa fa-search" /></button>
+                  <input className={styleInput} placeholder="Search" onBlur={() => {
+                    setStyleInput('d-none')
+                    setStyleButton('')
+                  }} onChange={(e)=>{
+                    handleChange(e)
+                  }}/>
+                </div>
                 <NavLink className="btn text-light" to='/search'>Search</NavLink>
-              </form>
+              </div>
             </div>
             <div>
               <NavLink className="btn text-light" to='/cart'><i className="fa fa-cart-arrow-down"><span className="ms-1">(1)</span></i></NavLink>
@@ -37,19 +62,19 @@ export default function Header() {
             </div>
             <ul className="navbar-nav me-auto mt-2 mt-lg-0">
               <li className="nav-item">
-                <NavLink className="nav-link active" to='/' aria-current="page">Home</NavLink>
+                <NavLink className="nav-link" to='/' aria-current="page">Home</NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link active" to='/' aria-current="page">Men</NavLink>
+                <NavLink className="nav-link" to='/' aria-current="page">Men</NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link active" to='/' aria-current="page">Woman</NavLink>
+                <NavLink className="nav-link" to='/' aria-current="page">Woman</NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link active" to='/' aria-current="page">Kid</NavLink>
+                <NavLink className="nav-link" to='/' aria-current="page">Kid</NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link active" to='/' aria-current="page">Sport</NavLink>
+                <NavLink className="nav-link" to='/' aria-current="page">Sport</NavLink>
               </li>
             </ul>
           </div>
@@ -58,3 +83,5 @@ export default function Header() {
     </header>
   );
 }
+
+export default Header

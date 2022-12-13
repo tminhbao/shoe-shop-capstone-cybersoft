@@ -14,6 +14,9 @@ import { store } from "./redux/configStore";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import HomeTemplate from "./templates/HomeTemplate/HomeTemplate";
 
+// SASS
+import './/assets/sass/index.scss'
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
