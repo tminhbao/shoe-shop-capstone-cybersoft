@@ -4,7 +4,7 @@ footer {
     .menu {
         position: relative;
         z-index: 10;
-        box-shadow: 0px 4px 4px $sd-25;
+        box-shadow: $sd-25;
         a {
             color: $text-c1-dark;
         }

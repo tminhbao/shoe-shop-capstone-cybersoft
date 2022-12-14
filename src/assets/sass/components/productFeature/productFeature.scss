@@ -1,0 +1,30 @@
+@import '../../index.scss';
+
+div{
+    .title{
+        background: $linear-1;
+    }
+
+    .card{
+        background: $bg-c2-light;
+        box-shadow: $sd-25;
+        position: relative;
+        .heart-icon{
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            i{
+                font-size: 2rem;
+            }
+        }
+        .card-text{
+            color: $text-c1-secondary;
+        }
+        .buy-btn{
+            background: $bg-c1-success;
+        }
+        .price{
+            background: $bg-c2-secondary;
+        }
+    }
+}

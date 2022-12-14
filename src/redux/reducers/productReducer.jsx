@@ -11,6 +11,9 @@ const productReducer = createSlice({
   reducers: {
     getSearch: (state, action) => {
       state.search = action.payload
+    },
+    getProduct: (state, action)=>{
+      state.product = action.payload
     }
   },
 });
@@ -18,3 +21,9 @@ const productReducer = createSlice({
 export const { getSearch } = productReducer.actions;
 
 export default productReducer.reducer;
+
+export const getProductApi=()=>{
+  return async (dispacth)=>{
+    
+  }
+}
