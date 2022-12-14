@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { http } from "../../util/config";
 
 const initialState = {
   product: null,
-  search: 'aa',
+  search: '',
 };
 
 const productReducer = createSlice({
@@ -12,18 +13,20 @@ const productReducer = createSlice({
     getSearch: (state, action) => {
       state.search = action.payload
     },
-    getProduct: (state, action)=>{
+    getProduct: (state, action) => {
       state.product = action.payload
     }
   },
 });
 
-export const { getSearch } = productReducer.actions;
+export const { getSearch, getProduct } = productReducer.actions;
 
 export default productReducer.reducer;
 
-export const getProductApi=()=>{
-  return async (dispacth)=>{
-    
+export const getProductApi = () => {
+  return async (dispacth) => {
+    const result = await http.get('/api/Product')
+    const actionProduct = getProduct(result.data.content)
+    dispacth(actionProduct)
   }
 }

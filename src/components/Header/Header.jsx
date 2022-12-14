@@ -24,7 +24,7 @@ const Header = () => {
           <button className="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon" />
           </button>
-          <NavLink className="navbar-brand" to='/'><img src="../image/image 3 (1).png" alt="" /></NavLink>
+          <NavLink className="navbar-brand" to='/'><img src="../image/image 3.png" alt="" /></NavLink>
           <div className="d-flex">
             <div className="d-sm-inline d-none">
               <div className="d-flex my-2 my-lg-0">

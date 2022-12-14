@@ -1,8 +1,36 @@
 @import '../../index.scss';
 
-.carousel-item{
-    margin: 0;
-    height: 30rem;
-    color: $text-c1-dark;
-    background: #364d79
+.item-left {
+    width: 62%;
+}
+
+.item-right {
+    width: 38%;
+    padding: 10% 0 15% 0;
+
+    .name {
+        height: 4rem;
+    }
+
+    .description {
+        height: 5rem;
+    }
+
+    .btn {
+        background: $bg-c1-warning;
+    }
+}
+
+.dots {
+    li {
+        background: $bg-c1-dark-25;
+        border-radius: 5px;
+    }
+
+    .slick-active {
+        border: $bd-1px-dark-25;
+    }
+}
+.slick-arrow{
+    width: 20rem;
 }
