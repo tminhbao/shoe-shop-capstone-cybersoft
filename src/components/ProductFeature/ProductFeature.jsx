@@ -22,7 +22,9 @@ const ProductFeature = () => {
       <div className='container pt-5'>
         <div className='row g-5'>
           {product?.map((item, i) => {
-            return <CardItem item={item} key={i}/>
+            return <div className='col col-lg-4 col-md-6 col-sm-6 col-12' key={i}>
+              <CardItem item={item}/>
+            </div>
           })}
         </div>
       </div>

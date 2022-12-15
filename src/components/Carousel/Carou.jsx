@@ -4,6 +4,7 @@ import { Carousel } from 'antd';
 
 // SCSS
 import '../../assets/sass/components/carousel/carousel.scss'
+import { NavLink } from 'react-router-dom';
 
 const contentStyle = {
     margin: 0,
@@ -27,7 +28,7 @@ const Carou = () => {
                             <div className='item-right'>
                                 <h3 className='name'>{item.name}</h3>
                                 <p className='description'>{item.description}</p>
-                                <button className='btn'>Buy now</button>
+                                <NavLink to={`/detail/${item.id}`} className='btn'>Buy now</NavLink>
                             </div>
                             <button>+</button>
                         </div>
