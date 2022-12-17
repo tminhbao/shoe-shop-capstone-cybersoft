@@ -18,7 +18,7 @@ const Carou = () => {
     return (
         <Carousel dots={{ className: 'dots' }} prevArrow nextArrow >
             {carousel?.map((item, i) => {
-                return <div key={i}>
+                return <div className='carousel' key={i}>
                     <div style={contentStyle}>
                         <div className='d-lg-flex d-md-flex d-sm-flex d-none'>
                             <button>-</button>
