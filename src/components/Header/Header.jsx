@@ -1,19 +1,25 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 // SCSS
 import '../../assets/sass/components/header/header.scss'
-import { getSearch } from '../../redux/reducers/productReducer';
+import { getProductSearch, getSearch } from '../../redux/reducers/productReducer';
 
 const Header = () => {
   const [styleInput, setStyleInput] = useState('d-none')
   const [styleButton, setStyleButton] = useState('')
+  const {product, search} =useSelector(state=>state.productReducer)
   const dispatch = useDispatch()
 
   const handleChange = (e)=>{
     const value = e.target.value;
     const action = getSearch(value)
+    dispatch(action)
+  }
+
+  const handleSubmit = () => {
+    const action = getProductSearch(product?.filter(item => item.name.toLowerCase().includes(search.toLowerCase()) || search === ''))
     dispatch(action)
   }
 
@@ -40,7 +46,7 @@ const Header = () => {
                     handleChange(e)
                   }}/>
                 </div>
-                <NavLink className="btn text-light" to='/search'>Search</NavLink>
+                <NavLink className="btn text-light" to='/search' onClick={handleSubmit()}>Search</NavLink>
               </div>
             </div>
             <div>

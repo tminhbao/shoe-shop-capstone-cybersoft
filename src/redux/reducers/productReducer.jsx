@@ -5,6 +5,7 @@ const initialState = {
   product: null,
   productDetail: null,
   search: '',
+  productSearch: null,
 };
 
 const productReducer = createSlice({
@@ -19,11 +20,14 @@ const productReducer = createSlice({
     },
     getProductDetail: (state, action) => {
       state.productDetail = action.payload
-    }
+    },
+    getProductSearch: (state, action) => {
+      state.productSearch = action.payload
+    },
   },
 });
 
-export const { getSearch, getProduct, getProductDetail } = productReducer.actions;
+export const { getSearch, getProduct, getProductDetail, getProductSearch } = productReducer.actions;
 
 export default productReducer.reducer;
 
@@ -34,8 +38,8 @@ export const getProductApi = () => {
     dispacth(actionProduct)
   }
 }
-export const getProductDetailApi = (id)=>{
-  return async (dispacth)=>{
+export const getProductDetailApi = (id) => {
+  return async (dispacth) => {
     const result = await http.get(`/api/Product/getbyid?id=${id}`)
     const actionDetail = getProductDetail(result.data.content)
     dispacth(actionDetail)

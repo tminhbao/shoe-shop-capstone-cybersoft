@@ -3,40 +3,65 @@
 $text-c1-dark: #000000;
 $text-c1-light: #FFFFFF;
 $text-c1-danger: #FB0B0B;
+$text-c2-danger: #FC0303;
 $text-c1-secondary: #CBC9C9;
+$text-c1-success: #1ED90E;
 
 // BACKGOUND
 // Color
 $bg-c1-secondary: #D9D9D9;
 $bg-c2-secondary: #DEDDDC;
+$bg-c3-secondary: #CCCCCC;
 $bg-c2-light: #F8F8F8;
 $bg-c3-light: #F5F5F5;
+$bg-c4-light: rgba(33, 33, 33, 0.08);
 $bg-c1-success: #9DE167;
 $bg-c1-warning: #F8B653;
+$bg-c1-primary: #6200EE;
 $bg-c1-dark-25: rgba(0, 0, 0, 0.25);
 $bg-c1-dark-50: rgba(0, 0, 0, 0.5);
 
 // Linear
 $linear-1: linear-gradient(180deg, #F21299 0%, #1B02B5 100%);
+$linear-2: linear-gradient(180deg, #6181F3 0%, #7C97F5 99.48%);
+$linear-3: linear-gradient(270deg, rgba(62, 32, 248, 0.9) 5.14%, #D017EE 89.71%);
 
 // BORDER
-$bd-1px-dark-25: 1px solid rgba(0, 0, 0, 0.25) ;
+$bd-1px-dark-25: 1px solid rgba(0, 0, 0, 0.25);
+// Radius
+$bd-c1-radius: 4px 4px 0px 0px;
 
 // SHADOW
 $sd-dark-25: 0px 4px 4px rgba(0, 0, 0, 0.25);
 $sd-dark-50: 6px 6px 15px rgba(0, 0, 0, 0.5);
+$sd-search: 0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2);
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-a{
+
+a {
     text-decoration: none;
 }
-ul{
+
+ul {
     padding: 0;
 }
-li{
+
+li {
     list-style: none;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
 }
