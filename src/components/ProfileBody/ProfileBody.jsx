@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./ProfileBody.css";
 import picture from "../../assets/img/download.png";
 import pictureProduct from "../../assets/img/image5.png";
+import { Pagination } from "antd";
 
 export default function ProfileBody() {
   const [isActiveTab, setIsActiveTab] = useState(1);
@@ -271,6 +272,13 @@ export default function ProfileBody() {
               </tr>
             </tbody>
           </table>
+          <Pagination
+            defaultCurrent={1}
+            total={50}
+            style={{
+              marginLeft: "76%",
+            }}
+          />
         </div>
         <div
           id="Tab02"
