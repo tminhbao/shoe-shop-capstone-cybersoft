@@ -1,0 +1,16 @@
+.profile-title-wrapper {
+  background: linear-gradient(180deg, #f21299 0%, #1b02b5 100%);
+  padding: 14px;
+  width: 40%;
+  margin: 60px 0;
+}
+
+.profile-title {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 48px;
+  color: #fffefe;
+  margin-bottom: 0;
+}
