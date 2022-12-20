@@ -1,51 +1,81 @@
-import React, { useEffect } from 'react'
-import SearchResult from '../../components/SearchResult/SearchResult'
-import '../../assets/sass/components/search/search.scss'
-import { useDispatch, useSelector } from 'react-redux'
-import { getProductApi, getProductSearch, getSearch } from '../../redux/reducers/productReducer'
+import React, { useEffect } from "react";
+import SearchResult from "../../components/SearchResult/SearchResult";
+import "../../assets/sass/components/search/search.scss";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getProductApi,
+  getProductSearch,
+  getSearch,
+} from "../../redux/reducers/productReducer";
 
 const Search = () => {
-  const { search, product, productSearch } = useSelector(state => state.productReducer);
-  const dispatch = useDispatch()
+  const { search, product, productSearch } = useSelector(
+    (state) => state.productReducer
+  );
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const value = e.target.value;
-    const action = getSearch(value)
-    dispatch(action)
-  }
+    const action = getSearch(value);
+    dispatch(action);
+  };
 
   const handleSubmit = () => {
-    const action = getProductSearch(product?.filter(item => item.name.toLowerCase().includes(search.toLowerCase()) || search === ''))
-    dispatch(action)
-  }
+    const action = getProductSearch(
+      product?.filter(
+        (item) =>
+          item.name.toLowerCase().includes(search.toLowerCase()) ||
+          search === ""
+      )
+    );
+    dispatch(action);
+  };
   const getArrProductApi = async () => {
-    const action = getProductApi()
-    dispatch(action)
-  }
+    const action = getProductApi();
+    dispatch(action);
+  };
 
   useEffect(() => {
-    getArrProductApi()
-  })
+    getArrProductApi();
+  }, []);
 
   useEffect(() => {
-    const action = getProductSearch(product?.filter(item => item.name.toLowerCase().includes(search.toLowerCase()) || search === ''))
-    dispatch(action)
-  },[])
+    const action = getProductSearch(
+      product?.filter(
+        (item) =>
+          item.name.toLowerCase().includes(search.toLowerCase()) ||
+          search === ""
+      )
+    );
+    dispatch(action);
+  }, []);
 
   return (
-    <div className='search'>
-      <div className='container'>
-        <div className='search-box pt-5 pb-4'>
-          <div className='title'>Search</div>
-          <input className='px-3 py-1' type="text" name='input-search' placeholder='Product name...' onChange={handleChange} value={search} />
-          <button className='btn ms-3 rounded-pill px-4' onClick={() => {
-            handleSubmit()
-          }}>Search</button>
+    <div className="search">
+      <div className="container">
+        <div className="search-box pt-5 pb-4">
+          <div className="title">Search</div>
+          <input
+            className="px-3 py-1"
+            type="text"
+            name="input-search"
+            placeholder="Product name..."
+            onChange={handleChange}
+            value={search}
+          />
+          <button
+            className="btn ms-3 rounded-pill px-4"
+            onClick={() => {
+              handleSubmit();
+            }}
+          >
+            Search
+          </button>
         </div>
       </div>
       <SearchResult productList={productSearch} />
     </div>
-  )
-}
+  );
+};
 
-export default Search
+export default Search;
