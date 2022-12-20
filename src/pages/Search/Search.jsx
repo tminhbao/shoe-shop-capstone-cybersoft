@@ -18,19 +18,6 @@ const Search = () => {
     const action = getProductSearch(product?.filter(item => item.name.toLowerCase().includes(search.toLowerCase()) || search === ''))
     dispatch(action)
   }
-  const getArrProductApi = async () => {
-    const action = getProductApi()
-    dispatch(action)
-  }
-
-  useEffect(() => {
-    getArrProductApi()
-  })
-
-  useEffect(() => {
-    const action = getProductSearch(product?.filter(item => item.name.toLowerCase().includes(search.toLowerCase()) || search === ''))
-    dispatch(action)
-  },[])
 
   return (
     <div className='search'>

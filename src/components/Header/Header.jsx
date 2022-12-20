@@ -18,11 +18,6 @@ const Header = () => {
     dispatch(action)
   }
 
-  const handleSubmit = () => {
-    const action = getProductSearch(product?.filter(item => item.name.toLowerCase().includes(search.toLowerCase()) || search === ''))
-    dispatch(action)
-  }
-
   return (
     <header>
       <nav className="navbar navbar-expand-sm navbar-dark bg-black">
@@ -46,7 +41,7 @@ const Header = () => {
                     handleChange(e)
                   }}/>
                 </div>
-                <NavLink className="btn text-light" to='/search' onClick={handleSubmit()}>Search</NavLink>
+                <NavLink className="btn text-light" to='/search' >Search</NavLink>
               </div>
             </div>
             <div>
