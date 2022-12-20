@@ -15,16 +15,16 @@ export default function Footer() {
                 <h5>GET HELP</h5>
                 <ul>
                   <li>
-                    <NavLink to={"/"}>Home</NavLink>
+                    <NavLink to="/">Home</NavLink>
                   </li>
                   <li>
-                    <NavLink to={"/"}>Nike</NavLink>
+                    <NavLink to="/">Nike</NavLink>
                   </li>
                   <li>
-                    <NavLink to={"/"}>Adidas</NavLink>
+                    <NavLink to="/">Adidas</NavLink>
                   </li>
                   <li>
-                    <NavLink to={"/"}>Contact</NavLink>
+                    <NavLink to="/">Contact</NavLink>
                   </li>
                 </ul>
               </div>
