@@ -1,4 +1,4 @@
-span.nav-link.active {
+span.nav-links.active {
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
@@ -8,7 +8,7 @@ span.nav-link.active {
   color: #dd2aed;
 }
 
-span.nav-link {
+span.nav-links {
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
@@ -19,20 +19,21 @@ span.nav-link {
   color: #000000;
 }
 
-span.nav-link:hover {
+span.nav-links:hover {
   opacity: 0.7;
   animation: all 0.5s linear;
   cursor: pointer;
 }
 
-.nav-link {
+.nav-links {
   background-color: transparent;
   border: none;
   border-left: 1px solid #dedddc;
   border-bottom: 1px solid #dedddc;
+  padding: 10px;
 }
 
-.nav-link:last-child {
+.nav-links:last-child {
   border-right: 1px solid #dedddc;
 }
 

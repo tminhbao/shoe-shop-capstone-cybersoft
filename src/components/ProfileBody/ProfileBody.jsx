@@ -173,13 +173,13 @@ export default function ProfileBody() {
       <div className="row mt-5">
         <div className="nav">
           <span
-            className={isActiveTab === 1 ? "nav-link active" : "nav-link"}
+            className={isActiveTab === 1 ? "nav-links active" : "nav-links"}
             onClick={() => setIsActiveTab(1)}
           >
             Order History
           </span>
           <span
-            className={isActiveTab === 2 ? "nav-link active" : "nav-link"}
+            className={isActiveTab === 2 ? "nav-links active" : "nav-links"}
             onClick={() => setIsActiveTab(2)}
           >
             Favourite
