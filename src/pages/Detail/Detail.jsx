@@ -1,5 +1,27 @@
-import React from "react";
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import { getProductDetailApi } from '../../redux/reducers/productReducer'
+import CardItem from '../../components/CardItem/CardItem'
+import RelatedProduct from '../../components/RelatedProduct/RelatedProduct'
+import ProductDetail from '../../components/ProductDetail/ProductDetail'
 
-export default function Detail() {
-  return <div>Detail</div>;
+const Detail = () => {
+  const { productDetail } = useSelector(state => state.productReducer)
+  const dispatch = useDispatch()
+  const param = useParams()
+
+  useEffect(()=>{
+    const actionAsync = getProductDetailApi(param.id)
+    dispatch(actionAsync)
+  }, [param.id])
+
+  return (
+    <div className='detail'>
+      <ProductDetail productDetail={productDetail}/>
+      <RelatedProduct relatedProducts={productDetail?.relatedProducts}/>
+    </div>
+  )
 }
+
+export default Detail

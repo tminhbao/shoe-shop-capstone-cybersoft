@@ -1,29 +1,93 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
-export default function Header() {
+// SCSS
+import '../../assets/sass/components/header/header.scss'
+import { getProductSearch, getSearch } from '../../redux/reducers/productReducer';
+
+const Header = () => {
+  const [styleInput, setStyleInput] = useState('d-none')
+  const [styleButton, setStyleButton] = useState('')
+  const {product, search} =useSelector(state=>state.productReducer)
+  const dispatch = useDispatch()
+
+  const handleChange = (e)=>{
+    const value = e.target.value;
+    const action = getSearch(value)
+    dispatch(action)
+  }
+
+  const handleSubmit = () => {
+    const action = getProductSearch(product?.filter(item => item.name.toLowerCase().includes(search.toLowerCase()) || search === ''))
+    dispatch(action)
+  }
+
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="bg-dark text-white p-3 nav">
-          <NavLink
-            to="/"
-            className={({ isActive }) =>
-              isActive ? "nav-link active" : "nav-link"
-            }
-          >
-            Home
-          </NavLink>
-          <NavLink
-            to="/login"
-            className={({ isActive }) =>
-              isActive ? "nav-link active" : "nav-link"
-            }
-          >
-            Login
-          </NavLink>
+    <header>
+      <nav className="navbar navbar-expand-sm navbar-dark bg-black">
+        <div className="container">
+          <button className="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon" />
+          </button>
+          <NavLink className="navbar-brand" to='/'><img src="../image/image 3.png" alt="" /></NavLink>
+          <div className="d-flex">
+            <div className="d-sm-inline d-none">
+              <div className="d-flex my-2 my-lg-0">
+                <div className="search d-flex">
+                  <button className={`${styleButton} btn text-light`} onClick={() => {
+                    setStyleInput("form-control ps-5 bg-black text-light w-100")
+                    setStyleButton('button-search')
+                  }}><i className="fa fa-search" /></button>
+                  <input className={styleInput} placeholder="Search" onBlur={() => {
+                    setStyleInput('d-none')
+                    setStyleButton('')
+                  }} onChange={(e)=>{
+                    handleChange(e)
+                  }}/>
+                </div>
+                <NavLink className="btn text-light" to='/search' onClick={handleSubmit()}>Search</NavLink>
+              </div>
+            </div>
+            <div>
+              <NavLink className="btn text-light" to='/cart'><i className="fa fa-cart-arrow-down"><span className="ms-1">(1)</span></i></NavLink>
+              <NavLink className="btn text-light" to='/login'>Login</NavLink>
+              <NavLink className="btn text-light" to='/register'>Register</NavLink>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      </nav>
+      <nav className="navbar navbar-expand-sm">
+        <div className="container">
+          <div className="collapse navbar-collapse" id="collapsibleNavId">
+            <div className="d-sm-none">
+              <form className="d-flex my-2 my-lg-0">
+                <input className="form-control me-sm-2" type="text" placeholder="Search" />
+                <NavLink className="btn text-dark" to='/search'>Search</NavLink>
+              </form>
+            </div>
+            <ul className="navbar-nav me-auto mt-2 mt-lg-0">
+              <li className="nav-item">
+                <NavLink className="nav-link" to='/' aria-current="page">Home</NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to='/' aria-current="page">Men</NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to='/' aria-current="page">Woman</NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to='/' aria-current="page">Kid</NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to='/' aria-current="page">Sport</NavLink>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
   );
 }
+
+export default Header
