@@ -9,11 +9,13 @@
     "@testing-library/user-event": "^13.5.0",
     "antd": "^5.0.7",
     "axios": "^1.2.1",
+    "history": "^5.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-jwt": "^1.1.7",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.4.5",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^5.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -39,5 +41,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "css-loader": "^6.7.3",
+    "node-sass": "^8.0.0",
+    "sass-loader": "^13.2.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.75.0"
   }
 }
