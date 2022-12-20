@@ -1,0 +1,10 @@
+.register-title {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 48px;
+  margin-top: 48px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid #dedddc;
+}

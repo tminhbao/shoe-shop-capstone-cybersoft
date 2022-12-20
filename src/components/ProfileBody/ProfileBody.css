@@ -1,0 +1,53 @@
+span.nav-links.active {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 39px;
+  /* identical to box height */
+  color: #dd2aed;
+}
+
+span.nav-links {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 39px;
+  /* identical to box height */
+
+  color: #000000;
+}
+
+span.nav-links:hover {
+  opacity: 0.7;
+  animation: all 0.5s linear;
+  cursor: pointer;
+}
+
+.nav-links {
+  background-color: transparent;
+  border: none;
+  border-left: 1px solid #dedddc;
+  border-bottom: 1px solid #dedddc;
+  padding: 10px;
+}
+
+.nav-links:last-child {
+  border-right: 1px solid #dedddc;
+}
+
+.order-title {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 16px;
+  /* identical to box height, or 80% */
+
+  letter-spacing: 0.4px;
+
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    linear-gradient(180deg, #cb0dc3 0%, #7d0db1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
