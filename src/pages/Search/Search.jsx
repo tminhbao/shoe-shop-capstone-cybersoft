@@ -30,13 +30,14 @@ const Search = () => {
     );
     dispatch(action);
   };
-  const getArrProductApi = async () => {
-    const action = getProductApi();
-    dispatch(action);
-  };
+  // const getArrProductApi = async () => {
+  //   const action = getProductApi();
+  //   dispatch(action);
+  // };
 
   useEffect(() => {
-    getArrProductApi();
+    //getArrProductApi();
+    dispatch(getProductApi());
   }, []);
 
   useEffect(() => {
