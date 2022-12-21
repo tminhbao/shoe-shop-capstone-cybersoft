@@ -21,9 +21,34 @@ const Search = () => {
   };
 
   const handleSubmit = () => {
-    const action = getProductSearch(product?.filter(item => item.name.toLowerCase().includes(search.toLowerCase()) || search === ''))
-    dispatch(action)
-  }
+    const action = getProductSearch(
+      product?.filter(
+        (item) =>
+          item.name.toLowerCase().includes(search.toLowerCase()) ||
+          search === ""
+      )
+    );
+    dispatch(action);
+  };
+
+  // useEffect(() => {
+  //   //getArrProductApi();
+  //   dispatch(getProductApi());
+  // }, []);
+
+  // useEffect(() => {
+  //   const action = getProductSearch(
+  //     product?.filter(
+  //       (item) =>
+  //         item.name.toLowerCase().includes(search.toLowerCase()) ||
+  //         search === ""
+  //     )
+  //   );
+  //   dispatch(action);
+  // }, []);
+  //   const action = getProductSearch(product?.filter(item => item.name.toLowerCase().includes(search.toLowerCase()) || search === ''))
+  //   dispatch(action)
+  // }
 
   return (
     <div className="search">

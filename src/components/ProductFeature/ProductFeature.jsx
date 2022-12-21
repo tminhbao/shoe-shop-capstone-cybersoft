@@ -6,15 +6,15 @@ import CardItem from "../CardItem/CardItem";
 
 const ProductFeature = () => {
   const { product } = useSelector((state) => state.productReducer);
-  const dispacth = useDispatch();
+  const dispatch = useDispatch();
 
   const getArrProductApi = async () => {
-    dispacth(getProductApi());
+    dispatch(getProductApi());
   };
 
   useEffect(() => {
     getArrProductApi();
-  });
+  }, []);
 
   return (
     <div className="productFeature py-5">
