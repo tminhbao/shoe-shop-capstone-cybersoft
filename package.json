@@ -16,7 +16,11 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.4.5",
     "react-scripts": "^5.0.1",
+<<<<<<< HEAD
     "react-slick": "^0.29.0",
+=======
+    "sass": "^1.57.1",
+>>>>>>> 0547a3626e66ec9c6f97c632df8f62de5cd0110c
     "sass-loader": "^13.2.0",
     "slick-carousel": "^1.8.1",
     "web-vitals": "^2.1.4"
