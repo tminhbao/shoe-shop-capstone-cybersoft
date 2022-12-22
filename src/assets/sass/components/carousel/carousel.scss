@@ -21,19 +21,22 @@
             background: $bg-c1-warning;
         }
     }
-
-    .dots {
-        li {
-            background: $bg-c1-dark-25;
-            border-radius: 5px;
-        }
-
-        .slick-active {
-            border: $bd-1px-dark-25;
-        }
+}
+.arrow{
+    position: absolute;
+    top: 50%;
+    width: 1.5rem;
+    height: 2.5rem;
+    cursor: pointer;
+    z-index: 10;
+    &.next{
+        right: 10px;
     }
-
-    .slick-arrow {
-        width: 20rem;
+    &.prev{
+        left: 10px;
     }
 }
+.slick-dots{
+    bottom: 10px;
+}
+

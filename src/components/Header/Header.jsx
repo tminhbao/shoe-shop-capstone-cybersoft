@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
@@ -14,6 +15,20 @@ const Header = () => {
   const [styleButton, setStyleButton] = useState("");
   const { product, search } = useSelector((state) => state.productReducer);
   const dispatch = useDispatch();
+=======
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+
+// SCSS
+import '../../assets/sass/components/header/header.scss'
+import { getSearch } from '../../redux/reducers/productReducer';
+
+const Header = () => {
+  const [styleInput, setStyleInput] = useState('d-none')
+  const [styleButton, setStyleButton] = useState('')
+  const dispatch = useDispatch()
+>>>>>>> DAI
 
   const handleChange = (e) => {
     const value = e.target.value;
