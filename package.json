@@ -17,9 +17,13 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.4.5",
     "react-scripts": "^5.0.1",
+<<<<<<< HEAD
     "react-slick": "^0.29.0",
     "sass-loader": "^13.2.0",
     "slick-carousel": "^1.8.1",
+=======
+    "sass": "^1.56.2",
+>>>>>>> minhbao
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -45,5 +49,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "css-loader": "^6.7.3",
+    "node-sass": "^8.0.0",
+    "sass-loader": "^13.2.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.75.0"
   }
 }
