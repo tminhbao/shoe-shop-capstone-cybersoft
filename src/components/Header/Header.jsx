@@ -1,15 +1,14 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 // SCSS
 import '../../assets/sass/components/header/header.scss'
-import { getProductSearch, getSearch } from '../../redux/reducers/productReducer';
+import { getSearch } from '../../redux/reducers/productReducer';
 
 const Header = () => {
   const [styleInput, setStyleInput] = useState('d-none')
   const [styleButton, setStyleButton] = useState('')
-  const {product, search} =useSelector(state=>state.productReducer)
   const dispatch = useDispatch()
 
   const handleChange = (e)=>{
