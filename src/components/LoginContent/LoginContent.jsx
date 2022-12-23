@@ -1,8 +1,31 @@
+import { useFormik } from "formik";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import * as yup from "yup";
+import { loginApi } from "../../redux/reducers/userReducer";
+import LoginFacebook from "../LoginFacebook/LoginFacebook";
 
 export default function LoginContent() {
+  const dispatch = useDispatch();
+  const form = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: yup.object().shape({
+      email: yup
+        .string()
+        .required("email cannot be empty")
+        .email("email is invalid"),
+      password: yup.string().required("password cannot be empty"),
+    }),
+    onSubmit: (values) => {
+      const actionSync = loginApi(values);
+      dispatch(actionSync);
+    },
+  });
   return (
-    <div className="form-wrapper">
+    <form className="form-wrapper" onSubmit={form.handleSubmit}>
       <div className="form-group w-100">
         <p className="form-input-title">Email</p>
         <input
@@ -22,10 +45,12 @@ export default function LoginContent() {
             alignSelf: "stretch",
             flexGrow: 0,
           }}
+          onChange={form.handleChange}
+          onBlur={form.handleBlur}
         />
-        {/* {form.errors.email && (
-    <p className="text-danger">{form.errors.email}</p>
-  )} */}
+        {form.errors.email && (
+          <small className="text-danger">{form.errors.email}</small>
+        )}
       </div>
       <div className="form-group w-100 mt-5">
         <p className="form-input-title">Password</p>
@@ -47,10 +72,12 @@ export default function LoginContent() {
             flexGrow: 0,
           }}
           type="password"
+          onChange={form.handleChange}
+          onBlur={form.handleBlur}
         />
-        {/* {form.errors.password && (
-    <p className="text-danger">{form.errors.password}</p>
-  )} */}
+        {form.errors.password && (
+          <small className="text-danger">{form.errors.password}</small>
+        )}
       </div>
       <div className="form-group w-100 d-flex justify-content-end align-items-center mt-4">
         <div className="btn-register">
@@ -60,10 +87,7 @@ export default function LoginContent() {
           Login
         </button>
       </div>
-      <div className="form-group w-100 facebook-register">
-        <i className="fab fa-facebook m-2 icon-facebook"></i>
-        <span className="m-2">Continue with Facebook</span>
-      </div>
-    </div>
+      <LoginFacebook />
+    </form>
   );
 }

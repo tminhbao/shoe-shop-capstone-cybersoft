@@ -1,17 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ProfileBody.css";
 import picture from "../../assets/img/download.png";
 import pictureProduct from "../../assets/img/image5.png";
 import { Pagination } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { getProfileApi } from "../../redux/reducers/userReducer";
 
 export default function ProfileBody() {
   const [isActiveTab, setIsActiveTab] = useState(1);
+  const { userProfile } = useSelector((state) => state.userReducer);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const actionSync = getProfileApi();
+    dispatch(actionSync);
+  }, []);
+
   return (
     <div className="container">
       <div className="row">
         <div className="col-3">
           <div className="avatar-wrapper">
-            <img src={picture} alt="" />
+            <img src={userProfile?.avatar} alt="" className="w-100" />
           </div>
         </div>
         <div className="col-9">
@@ -37,6 +46,7 @@ export default function ProfileBody() {
                       alignSelf: "stretch",
                       flexGrow: 0,
                     }}
+                    value={userProfile?.email}
                   />
                 </div>
               </div>
@@ -61,6 +71,7 @@ export default function ProfileBody() {
                       flexGrow: 0,
                     }}
                     type="text"
+                    value={userProfile?.name}
                   />
                 </div>
               </div>
@@ -87,6 +98,7 @@ export default function ProfileBody() {
                       flexGrow: 0,
                     }}
                     type="text"
+                    value={userProfile?.phone}
                   />
                 </div>
               </div>
@@ -111,6 +123,7 @@ export default function ProfileBody() {
                       flexGrow: 0,
                     }}
                     type="text"
+                    value={userProfile?.password}
                   />
                 </div>
               </div>
@@ -140,16 +153,18 @@ export default function ProfileBody() {
                       type="radio"
                       id="male"
                       name="gender"
-                      defaultValue={1}
+                      defaultValue="true"
                       className="mx-2"
+                      checked={userProfile?.gender}
                     />
                     <label htmlFor="male">Male</label>
                     <input
                       type="radio"
                       id="female"
                       name="gender"
-                      defaultValue={0}
+                      defaultValue="false"
                       className="mx-2"
+                      checked={!userProfile?.gender}
                     />
                     <label htmlFor="female">Female</label>
                   </div>

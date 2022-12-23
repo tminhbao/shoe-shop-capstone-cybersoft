@@ -9,24 +9,25 @@
     "@testing-library/user-event": "^13.5.0",
     "antd": "^5.0.7",
     "axios": "^1.2.1",
+    "formik": "^2.2.9",
     "history": "^5.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-facebook-login": "^4.1.1",
     "react-jwt": "^1.1.7",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.4.5",
     "react-scripts": "^5.0.1",
-<<<<<<< HEAD
     "react-slick": "^0.29.0",
-=======
     "sass": "^1.57.1",
->>>>>>> 0547a3626e66ec9c6f97c632df8f62de5cd0110c
     "sass-loader": "^13.2.0",
+    "web-vitals": "^2.1.4",
+    "yup": "^0.32.11",
     "slick-carousel": "^1.8.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "set HTTPS=true&&react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
