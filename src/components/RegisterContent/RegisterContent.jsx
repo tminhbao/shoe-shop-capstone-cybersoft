@@ -1,9 +1,52 @@
+import { useFormik } from "formik";
 import React from "react";
+import { useDispatch } from "react-redux";
 import "./RegisterContent.css";
+import * as yup from "yup";
+import { registerApi } from "../../redux/reducers/userReducer";
 
 export default function RegisterContent() {
+  const dispatch = useDispatch();
+  const form = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+      name: "",
+      gender: "",
+      phone: "",
+    },
+    validationSchema: yup.object().shape({
+      email: yup
+        .string()
+        .required("email cannot be empty")
+        .email("email is invalid"),
+      password: yup
+        .string()
+        .required("password cannot be empty")
+        .min(6, "password must be at least 6 characters"),
+      passwordConfirm: yup
+        .string()
+        .oneOf([yup.ref("password"), null], "Passwords must match"),
+      name: yup.string().required("name cannot be empty").max(50),
+      gender: yup.bool().required("gender cannot be empty"),
+      phone: yup.string().required("phone cannot be empty"),
+    }),
+    onSubmit: (values) => {
+      let { email, password, name, gender, phone } = values;
+      let genderValue = gender === "true";
+      let data = {
+        email,
+        password,
+        name,
+        genderValue,
+        phone,
+      };
+      const asyncAction = registerApi(data);
+      dispatch(asyncAction);
+    },
+  });
   return (
-    <div className="form-wrapper-register">
+    <form className="form-wrapper-register" onSubmit={form.handleSubmit}>
       <div className="row mt-5 row-input-register">
         <div className="col-6">
           <div className="form-group w-75">
@@ -25,10 +68,12 @@ export default function RegisterContent() {
                 alignSelf: "stretch",
                 flexGrow: 0,
               }}
+              onChange={form.handleChange}
+              onBlur={form.handleBlur}
             />
-            {/* {form.errors.email && (
-<p className="text-danger">{form.errors.email}</p>
-)} */}
+            {form.errors.email && (
+              <small className="text-danger">{form.errors.email}</small>
+            )}
           </div>
         </div>
         <div className="col-6">
@@ -52,10 +97,12 @@ export default function RegisterContent() {
                 flexGrow: 0,
               }}
               type="text"
+              onChange={form.handleChange}
+              onBlur={form.handleBlur}
             />
-            {/* {form.errors.password && (
-<p className="text-danger">{form.errors.password}</p>
-)} */}
+            {form.errors.name && (
+              <small className="text-danger">{form.errors.name}</small>
+            )}
           </div>
         </div>
       </div>
@@ -81,10 +128,12 @@ export default function RegisterContent() {
                 flexGrow: 0,
               }}
               type="password"
+              onChange={form.handleChange}
+              onBlur={form.handleBlur}
             />
-            {/* {form.errors.email && (
-<p className="text-danger">{form.errors.email}</p>
-)} */}
+            {form.errors.password && (
+              <small className="text-danger">{form.errors.password}</small>
+            )}
           </div>
         </div>
         <div className="col-6">
@@ -108,10 +157,12 @@ export default function RegisterContent() {
                 flexGrow: 0,
               }}
               type="text"
+              onChange={form.handleChange}
+              onBlur={form.handleBlur}
             />
-            {/* {form.errors.password && (
-<p className="text-danger">{form.errors.password}</p>
-)} */}
+            {form.errors.phone && (
+              <small className="text-danger">{form.errors.phone}</small>
+            )}
           </div>
         </div>
       </div>
@@ -137,10 +188,14 @@ export default function RegisterContent() {
                 flexGrow: 0,
               }}
               type="password"
+              onChange={form.handleChange}
+              onBlur={form.handleBlur}
             />
-            {/* {form.errors.email && (
-<p className="text-danger">{form.errors.email}</p>
-)} */}
+            {form.errors.passwordConfirm && (
+              <small className="text-danger">
+                {form.errors.passwordConfirm}
+              </small>
+            )}
           </div>
         </div>
         <div className="col-6 d-flex mt-4">
@@ -150,16 +205,20 @@ export default function RegisterContent() {
               type="radio"
               id="male"
               name="gender"
-              defaultValue={1}
+              value="true"
               className="mx-2"
+              onChange={form.handleChange}
+              onBlur={form.handleBlur}
             />
             <label htmlFor="male">Male</label>
             <input
               type="radio"
               id="female"
               name="gender"
-              defaultValue={0}
+              value="false"
               className="mx-2"
+              onChange={form.handleChange}
+              onBlur={form.handleBlur}
             />
             <label htmlFor="female">Female</label>
           </div>
@@ -199,6 +258,6 @@ export default function RegisterContent() {
           </div>
         </div>
       </div>
-    </div>
+    </form>
   );
 }
