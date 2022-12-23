@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import * as yup from "yup";
 import { loginApi } from "../../redux/reducers/userReducer";
+import LoginFacebook from "../LoginFacebook/LoginFacebook";
 
 export default function LoginContent() {
   const dispatch = useDispatch();
@@ -86,10 +87,7 @@ export default function LoginContent() {
           Login
         </button>
       </div>
-      <div className="form-group w-100 facebook-register">
-        <i className="fab fa-facebook m-2 icon-facebook"></i>
-        <span className="m-2">Continue with Facebook</span>
-      </div>
+      <LoginFacebook />
     </form>
   );
 }

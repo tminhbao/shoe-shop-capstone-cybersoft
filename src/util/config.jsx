@@ -17,6 +17,8 @@ http.interceptors.request.use(
   (config) => {
     config.headers = {
       ...config.headers,
+      "Content-Type": "application/json",
+      charset: "utf-8",
       Authorization: `Bearer ${localStorage.getItem(ACCESS_TOKEN)}`,
       TokenCybersoft: TOKEN_CYBERSOFT,
     };
