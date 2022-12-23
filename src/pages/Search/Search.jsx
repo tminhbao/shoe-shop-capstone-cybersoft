@@ -1,20 +1,11 @@
-<<<<<<< HEAD
-import React, { useEffect } from "react";
+import React from "react";
 import SearchResult from "../../components/SearchResult/SearchResult";
 import "../../assets/sass/components/search/search.scss";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getProductApi,
   getProductSearch,
   getSearch,
 } from "../../redux/reducers/productReducer";
-=======
-import React from 'react'
-import SearchResult from '../../components/SearchResult/SearchResult'
-import '../../assets/sass/components/search/search.scss'
-import { useDispatch, useSelector } from 'react-redux'
-import { getProductSearch, getSearch } from '../../redux/reducers/productReducer'
->>>>>>> DAI
 
 const Search = () => {
   const { search, product, productSearch } = useSelector(

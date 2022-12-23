@@ -6,6 +6,7 @@ import axios from "axios";
 const initialState = {
   userLogin: JSON.parse(localStorage.getItem(USER_LOGIN)) || null,
   userProfile: null,
+  userRegister: null,
 };
 
 const userReducer = createSlice({
@@ -18,10 +19,14 @@ const userReducer = createSlice({
     getProfileAction: (state, action) => {
       state.userProfile = action.payload;
     },
+    registerAction: (state, action) => {
+      state.userRegister = action.payload;
+    },
   },
 });
 
-export const { loginAction, getProfileAction } = userReducer.actions;
+export const { loginAction, getProfileAction, registerAction } =
+  userReducer.actions;
 
 export default userReducer.reducer;
 
@@ -70,5 +75,15 @@ export const getProfileApi = () => {
     const result = await http.post("/api/Users/getProfile");
     const action = getProfileAction(result.data.content);
     dispatch(action);
+  };
+};
+
+export const registerApi = (userRegister) => {
+  return async (dispatch) => {
+    const result = await http.post("/api/Users/signup", userRegister);
+    console.log(result.data.content);
+    const action = registerAction(result.data.content);
+    dispatch(action);
+    history.push("/login");
   };
 };
