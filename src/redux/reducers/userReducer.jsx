@@ -7,6 +7,25 @@ const initialState = {
   userLogin: JSON.parse(localStorage.getItem(USER_LOGIN)) || null,
   userProfile: null,
   userRegister: null,
+  userCart: [
+    {
+      id: 12,
+      name: "Nike Air Max 270 React",
+      alias: "nike-air-max-270-react",
+      price: 750,
+      description:
+        "Nike shoe is the rare high-percentage shooter who's also a coach's dream on D. Designed for his unrivaled 2-way game, the PG 4 unveils a new cushioning system that's lightweight, articulated and responsive, ideal for players like PG who go hard every play.\r\n\r\n",
+      size: "[36,37,38,39,40,41,42]",
+      shortDescription: "Paul George is the rare high-percentage shooter",
+      quantity: 445,
+      deleted: false,
+      categories:
+        '[{"id":"NIKE","category":"NIKE"},{"id":"MEN","category":"MEN"},{"id":"WOMEN","category":"WOMEN"}]',
+      relatedProducts: "[11,9,15,16]",
+      feature: false,
+      image: "https://shop.cyberlearn.vn/images/nike-air-max-270-react.png",
+    },
+  ],
 };
 
 const userReducer = createSlice({

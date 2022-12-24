@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { USER_LOGIN, ACCESS_TOKEN } from "../../util/config";
 
 // SCSS
 import "../../assets/sass/components/header/header.scss";
@@ -16,7 +17,7 @@ const Header = () => {
     const action = getSearch(value);
     dispatch(action);
   };
-
+  const { userLogin, userProfile } = useSelector((state) => state.userReducer);
   return (
     <header>
       <nav className="navbar navbar-expand-sm navbar-dark bg-black">
@@ -73,12 +74,36 @@ const Header = () => {
                   <span className="ms-1">(1)</span>
                 </i>
               </NavLink>
-              <NavLink className="btn text-light" to="/login">
-                Login
-              </NavLink>
-              <NavLink className="btn text-light" to="/register">
-                Register
-              </NavLink>
+              {userProfile ? (
+                <React.Fragment>
+                  <NavLink
+                    className="text-white m-2"
+                    style={{ fontWeight: "bold" }}
+                    to="/profile"
+                  >
+                    Hello, {userProfile?.name}
+                  </NavLink>
+                  <NavLink
+                    className="btn text-light"
+                    onClick={() => {
+                      localStorage.removeItem(USER_LOGIN);
+                      localStorage.removeItem(ACCESS_TOKEN);
+                      window.location.href = "/";
+                    }}
+                  >
+                    Logout
+                  </NavLink>
+                </React.Fragment>
+              ) : (
+                <React.Fragment>
+                  <NavLink className="btn text-light" to="/login">
+                    Login
+                  </NavLink>
+                  <NavLink className="btn text-light" to="/register">
+                    Register
+                  </NavLink>
+                </React.Fragment>
+              )}
             </div>
           </div>
         </div>
