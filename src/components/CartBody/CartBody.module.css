@@ -35,4 +35,7 @@
   border: none;
   text-transform: uppercase;
   color: white;
+  width: 14% !important;
+  padding: 6px 8px;
+  margin-left: 82%;
 }

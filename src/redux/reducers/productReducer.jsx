@@ -2,10 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 import { http } from "../../util/config";
 
 const initialState = {
-  product: null,
+  product: null, // array
   productDetail: null,
   search: "",
   productSearch: null,
+  productCart: null, // array
+  totalQuantity: 0,
+  numberQuantity: 1,
 };
 
 const productReducer = createSlice({
