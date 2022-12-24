@@ -29,7 +29,7 @@ const ProductDetail = ({productDetail}) => {
                 </div>
                 <div className='input'>
                   <button className='btn num-box'>+</button>
-                  <input className='input-num mx-2 text-center' type="number" min={0}/>
+                  <input className='input-num mx-2 text-center py-1' type="number" min={0}/>
                   <button className='btn num-box'>-</button>
                 </div>
                 <button className='btn add-box mt-3'>Add to cart</button>

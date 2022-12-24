@@ -4,11 +4,24 @@ header {
     .search {
         position: relative;
 
+        &.animation {
+            animation: 0.5s changeWidth;
+        }
+
         .button-search {
             position: absolute;
             top: 0;
             left: 0;
         }
     }
+}
 
+@keyframes changeWidth {
+    0% {
+        width: 0;
+    }
+
+    100% {
+        width: 100%;
+    }
 }

@@ -1,11 +1,11 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import SearchResult from '../../components/SearchResult/SearchResult'
 import '../../assets/sass/components/search/search.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProductSearch, getSearch } from '../../redux/reducers/productReducer'
 
 const Search = () => {
-  const { search, product, productSearch } = useSelector(state => state.productReducer);
+  const { search, product } = useSelector(state => state.productReducer);
   const dispatch = useDispatch()
 
   const handleChange = (e) => {
@@ -19,6 +19,10 @@ const Search = () => {
     dispatch(action)
   }
 
+  useEffect(()=>{
+    handleSubmit()
+  },[])
+
   return (
     <div className='search'>
       <div className='container'>
@@ -30,7 +34,7 @@ const Search = () => {
           }}>Search</button>
         </div>
       </div>
-      <SearchResult productList={productSearch} />
+      <SearchResult />
     </div>
   )
 }

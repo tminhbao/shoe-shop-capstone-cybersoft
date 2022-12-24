@@ -18,7 +18,7 @@ const ProductFeature = () => {
 
   return (
     <div className='productFeature py-5'>
-      <h2 className='title ps-5 py-2 text-light'>Product Feature</h2>
+      <h2 className='title ps-5 py-2 text-light w-50'>Product Feature</h2>
       <div className='container pt-5'>
         <div className='row g-5'>
           {product?.map((item, i) => {
