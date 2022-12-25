@@ -5,8 +5,7 @@ const initialState = {
   product: null, // array
   productDetail: null,
   search: "",
-  productSearch: null,
-  productCart: null, // array
+  productSearch: null, // array
   totalQuantity: 0,
   numberQuantity: 1,
 };

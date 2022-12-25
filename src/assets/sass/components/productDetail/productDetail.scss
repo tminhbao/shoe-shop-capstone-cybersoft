@@ -23,14 +23,16 @@
         .input{
             .num-box{
                 background: $linear-2;
+                color: $text-c1-light;
             }
             .input-num{
-                width: 2rem;
+                width: 3rem;
                 border: none;
             }
         }
         .add-box{
             background: $linear-3;
+            color: $text-c1-light;
         }
     }
 }

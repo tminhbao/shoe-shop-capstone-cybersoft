@@ -47,18 +47,18 @@ export default function CartBody() {
                 <td>
                   <input type="checkbox" />
                 </td>
-                <td>{item.id}</td>
+                <td>{item.product.id}</td>
                 <td>
                   <img
-                    src={item.image}
+                    src={item.product.image}
                     alt=""
                     style={{
                       width: "50px",
                     }}
                   />
                 </td>
-                <td>{item.name}</td>
-                <td>{item.price}</td>
+                <td>{item.product.name}</td>
+                <td>{item.product.price}</td>
                 <td>
                   <button className={styles["btn-quantity"]}>+</button>
                   <span
@@ -68,11 +68,11 @@ export default function CartBody() {
                       padding: "2px 30px",
                     }}
                   >
-                    2
+                    {item.quantity}
                   </span>
                   <button className={styles["btn-quantity"]}>-</button>
                 </td>
-                <td>{item.price * 2}</td>
+                <td>{item.product.price * item.quantity}</td>
                 <td>
                   <button className={styles["btn-quantity"]}>Edit</button>
                   <button className={styles["btn-delete"]}>Delete</button>
