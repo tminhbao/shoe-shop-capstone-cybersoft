@@ -1,14 +1,14 @@
-import React from 'react'
-import Carou from '../../components/Carousel/Carou'
-import ProductFeature from '../../components/ProductFeature/ProductFeature'
+import React from "react";
+import Carou from "../../components/Carousel/Carou";
+import ProductFeature from "../../components/ProductFeature/ProductFeature";
 
 const Home = () => {
   return (
     <div>
-      <Carou/>
-      <ProductFeature/>
+      <Carou />
+      <ProductFeature />
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

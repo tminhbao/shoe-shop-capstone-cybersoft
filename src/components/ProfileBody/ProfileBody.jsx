@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./ProfileBody.css";
-import picture from "../../assets/img/download.png";
 import pictureProduct from "../../assets/img/image5.png";
 import { Pagination } from "antd";
 import { useDispatch, useSelector } from "react-redux";

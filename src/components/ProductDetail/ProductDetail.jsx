@@ -4,30 +4,35 @@ import "../../assets/sass/components/productDetail/productDetail.scss";
 import { getUserCart } from "../../redux/reducers/userReducer";
 
 const ProductDetail = ({ productDetail }) => {
-  const { userCart } = useSelector(state => state.userReducer)
-  const [quantity, setQuatity] = useState(1)
-  const dispatch = useDispatch()
+  const { userCart } = useSelector((state) => state.userReducer);
+  const [quantity, setQuatity] = useState(1);
+  const dispatch = useDispatch();
   const handleChange = (e) => {
-    let { value } = e.target
+    let { value } = e.target;
     if (value < 0 || value === null) {
-      value = 0
+      value = 0;
     }
-    setQuatity(value)
-  }
+    setQuatity(value);
+  };
   const handleClick = (num) => {
-    const value = Number(quantity) + num
+    let value = Number(quantity) + num;
     if (value < 0) {
-      value = 0
+      value = 0;
     }
-    setQuatity(value)
-  }
+    setQuatity(value);
+  };
   const handleCart = () => {
-    const index = userCart.findIndex(item=>item.product.id == productDetail.id)
-    if(index == -1){
-      const action = getUserCart({ product: productDetail, quantity: quantity })
-      dispatch(action)
+    const index = userCart.findIndex(
+      (item) => item.product.id === productDetail.id
+    );
+    if (index === -1) {
+      const action = getUserCart({
+        product: productDetail,
+        quantity: quantity,
+      });
+      dispatch(action);
     }
-  }
+  };
   return (
     <div className="productDetail">
       <div className="container">
@@ -56,23 +61,39 @@ const ProductDetail = ({ productDetail }) => {
                   <h4>{productDetail?.price}$</h4>
                 </div>
                 <div className="input">
-                  <button className="btn num-box" onClick={() => {
-                    handleClick(1)
-                  }}>+</button>
+                  <button
+                    className="btn num-box"
+                    onClick={() => {
+                      handleClick(1);
+                    }}
+                  >
+                    +
+                  </button>
                   <input
                     className="input-num mx-2 py-2 text-center"
                     type="number"
-                    value={quantity} onChange={(e) => {
-                      handleChange(e)
+                    value={quantity}
+                    onChange={(e) => {
+                      handleChange(e);
                     }}
                   />
-                  <button className="btn num-box" onClick={() => {
-                    handleClick(-1)
-                  }}>-</button>
+                  <button
+                    className="btn num-box"
+                    onClick={() => {
+                      handleClick(-1);
+                    }}
+                  >
+                    -
+                  </button>
                 </div>
-                <button className="btn add-box mt-3" onClick={() => {
-                  handleCart()
-                }}>Add to cart</button>
+                <button
+                  className="btn add-box mt-3"
+                  onClick={() => {
+                    handleCart();
+                  }}
+                >
+                  Add to cart
+                </button>
               </div>
             </div>
           </div>

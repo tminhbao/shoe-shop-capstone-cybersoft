@@ -23,13 +23,34 @@ const userReducer = createSlice({
       state.userRegister = action.payload;
     },
     getUserCart: (state, action) => {
-      state.userCart.push(action.payload)
+      state.userCart.push(action.payload);
+    },
+    updateCart: (state, action) => {
+      const { id, value } = action.payload;
+      const updateProductIndex = state.userCart.findIndex(
+        (item) => item.id === id
+      );
+      if (state.userCart[updateProductIndex].quantity === 1 && value === -1) {
+        state.userCart = state.userCart.filter((item) => item.id !== id);
+      } else {
+        state.userCart[updateProductIndex].quantity += value;
+      }
+    },
+    deleteProductCart: (state, action) => {
+      const { id } = action.payload;
+      state.userCart = state.userCart.filter((item) => item.id !== id);
     },
   },
 });
 
-export const { loginAction, getProfileAction, registerAction, getUserCart } =
-  userReducer.actions;
+export const {
+  loginAction,
+  getProfileAction,
+  registerAction,
+  getUserCart,
+  updateCart,
+  deleteProductCart,
+} = userReducer.actions;
 
 export default userReducer.reducer;
 

@@ -1,24 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import pictureProduct from "../../assets/img/image5.png";
+import { updateCart } from "../../redux/reducers/userReducer";
 import { USER_LOGIN } from "../../util/config";
 import styles from "./CartBody.module.css";
 
 export default function CartBody() {
   const dispatch = useDispatch();
-  const { email } = JSON.parse(localStorage.getItem(USER_LOGIN));
   const { userCart } = useSelector((state) => state.userReducer);
-
-  const updatedData = {
-    orderDetail: [
-      {
-        productId: "1",
-        quantity: 2,
-      },
-    ],
-    email,
-  };
-
   return (
     <>
       <table className="table">
@@ -60,7 +49,18 @@ export default function CartBody() {
                 <td>{item.product.name}</td>
                 <td>{item.product.price}</td>
                 <td>
-                  <button className={styles["btn-quantity"]}>+</button>
+                  <button
+                    className={styles["btn-quantity"]}
+                    onClick={() => {
+                      const action = updateCart({
+                        id: item.id,
+                        value: 1,
+                      });
+                      dispatch(action);
+                    }}
+                  >
+                    +
+                  </button>
                   <span
                     className="quantity"
                     style={{
@@ -70,7 +70,18 @@ export default function CartBody() {
                   >
                     {item.quantity}
                   </span>
-                  <button className={styles["btn-quantity"]}>-</button>
+                  <button
+                    className={styles["btn-quantity"]}
+                    onClick={() => {
+                      const action = updateCart({
+                        id: item.id,
+                        value: -1,
+                      });
+                      dispatch(action);
+                    }}
+                  >
+                    -
+                  </button>
                 </td>
                 <td>{item.product.price * item.quantity}</td>
                 <td>
