@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import pictureProduct from "../../assets/img/image5.png";
-import { updateCart } from "../../redux/reducers/userReducer";
+import {
+  deleteProductCart,
+  updateCart,
+} from "../../redux/reducers/userReducer";
 import { USER_LOGIN } from "../../util/config";
 import styles from "./CartBody.module.css";
 
@@ -86,7 +89,17 @@ export default function CartBody() {
                 <td>{item.product.price * item.quantity}</td>
                 <td>
                   <button className={styles["btn-quantity"]}>Edit</button>
-                  <button className={styles["btn-delete"]}>Delete</button>
+                  <button
+                    className={styles["btn-delete"]}
+                    onClick={() => {
+                      const action = deleteProductCart({
+                        id: item.id,
+                      });
+                      dispatch(action);
+                    }}
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             );
