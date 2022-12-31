@@ -9,6 +9,7 @@ const initialState = {
   userCart: [], // {product:{id:...},quantity}
   userOrder: [],
   userLikedProduct: [],
+  userOrderHistory: [],
 };
 
 const userReducer = createSlice({
@@ -48,6 +49,9 @@ const userReducer = createSlice({
     getUserLikedProductAction: (state, action) => {
       state.userLikedProduct.push(action.payload);
     },
+    getUserOrderHistoryAction: (state, action) => {
+      state.userOrderHistory = action.payload;
+    },
   },
 });
 
@@ -60,6 +64,7 @@ export const {
   deleteProductCartAction,
   submitOrderAction,
   getUserLikedProductAction,
+  getUserOrderHistoryAction,
 } = userReducer.actions;
 
 export default userReducer.reducer;
@@ -98,6 +103,7 @@ export const loginFacebookApi = (facebookToken) => {
 export const getProfileApi = () => {
   return async (dispatch) => {
     const result = await http.post("/api/Users/getProfile");
+    console.log(result.data.content);
     const action = getProfileAction(result.data.content);
     dispatch(action);
   };
@@ -117,7 +123,15 @@ export const submitOrderApi = (data) => {
   return async (dispatch) => {
     const result = await http.post("/api/Users/order", data);
     alert(result.data.content);
-    const action = submitOrderAction(result.data.content);
+    const action = submitOrderAction(data.orderDetail);
+    dispatch(action);
+  };
+};
+
+export const getUserOrderHistoryApi = () => {
+  return async (dispatch) => {
+    const result = await http.post("/api/Users/getProfile");
+    const action = getUserOrderHistoryAction(result.data.content.ordersHistory);
     dispatch(action);
   };
 };
