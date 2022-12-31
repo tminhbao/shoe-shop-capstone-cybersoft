@@ -78,16 +78,7 @@ export const loginApi = (userLogin) => {
 export const loginFacebookApi = (facebookToken) => {
   return async (dispatch) => {
     const result = await http.post("/api/Users/facebooklogin", facebookToken);
-    // const result = await axios({
-    //   url: "https://shop.cyberlearn.vn/api/Users/facebooklogin",
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     charset: "utf-8",
-    //   },
-    //   facebookToken,
-    // });
-    console.log(result.data);
+    console.log(result.data.content);
     const action = loginAction(result.data.content);
     dispatch(action);
     // Lưu trong localStorage
@@ -120,7 +111,7 @@ export const registerApi = (userRegister) => {
 export const submitOrderApi = (data) => {
   return async (dispatch) => {
     const result = await http.post("/api/Users/order", data);
-    console.log(result.data.content);
+    alert(result.data.content);
     const action = submitOrderAction(result.data.content);
     dispatch(action);
   };
