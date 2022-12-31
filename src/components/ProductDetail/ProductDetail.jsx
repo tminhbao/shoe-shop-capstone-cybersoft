@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "../../assets/sass/components/productDetail/productDetail.scss";
-import { getUserCart } from "../../redux/reducers/userReducer";
+import { getUserCartAction } from "../../redux/reducers/userReducer";
 
 const ProductDetail = ({ productDetail }) => {
   const { userCart } = useSelector((state) => state.userReducer);
@@ -26,7 +26,7 @@ const ProductDetail = ({ productDetail }) => {
       (item) => item.product.id === productDetail.id
     );
     if (index === -1) {
-      const action = getUserCart({
+      const action = getUserCartAction({
         product: productDetail,
         quantity: quantity,
       });

@@ -7,6 +7,7 @@ const initialState = {
   userProfile: null,
   userRegister: null,
   userCart: [],
+  userOrder: [],
 };
 
 const userReducer = createSlice({
@@ -22,10 +23,10 @@ const userReducer = createSlice({
     registerAction: (state, action) => {
       state.userRegister = action.payload;
     },
-    getUserCart: (state, action) => {
+    getUserCartAction: (state, action) => {
       state.userCart.push(action.payload);
     },
-    updateCart: (state, action) => {
+    updateCartAction: (state, action) => {
       const { id, value } = action.payload;
       const updateProductIndex = state.userCart.findIndex(
         (item) => item.id === id
@@ -36,9 +37,12 @@ const userReducer = createSlice({
         state.userCart[updateProductIndex].quantity += value;
       }
     },
-    deleteProductCart: (state, action) => {
+    deleteProductCartAction: (state, action) => {
       const { id } = action.payload;
       state.userCart = state.userCart.filter((item) => item.id !== id);
+    },
+    submitOrderAction: (state, action) => {
+      state.userOrder.push(action.payload);
     },
   },
 });
@@ -47,9 +51,10 @@ export const {
   loginAction,
   getProfileAction,
   registerAction,
-  getUserCart,
-  updateCart,
-  deleteProductCart,
+  getUserCartAction,
+  updateCartAction,
+  deleteProductCartAction,
+  submitOrderAction,
 } = userReducer.actions;
 
 export default userReducer.reducer;
@@ -109,5 +114,14 @@ export const registerApi = (userRegister) => {
     const action = registerAction(result.data.content);
     dispatch(action);
     history.push("/login");
+  };
+};
+
+export const submitOrderApi = (data) => {
+  return async (dispatch) => {
+    const result = await http.post("/api/Users/order", data);
+    console.log(result.data.content);
+    const action = submitOrderAction(result.data.content);
+    dispatch(action);
   };
 };

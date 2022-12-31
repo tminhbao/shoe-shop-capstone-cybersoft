@@ -1,16 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import pictureProduct from "../../assets/img/image5.png";
 import {
-  deleteProductCart,
-  updateCart,
+  deleteProductCartAction,
+  submitOrderApi,
+  updateCartAction,
 } from "../../redux/reducers/userReducer";
 import { USER_LOGIN } from "../../util/config";
 import styles from "./CartBody.module.css";
 
 export default function CartBody() {
   const dispatch = useDispatch();
-  const { userCart } = useSelector((state) => state.userReducer);
+  const { userCart, userLogin } = useSelector((state) => state.userReducer);
+  const [orders, setOrders] = useState();
+  const renderOrderProduct = () => {
+    let arrOrders = userCart.map((item) => {
+      const productOrder = {
+        productId: String(item.product.id),
+        quantity: Number(item.quantity),
+      };
+      return productOrder;
+    });
+    const data = {
+      orderDetail: arrOrders,
+      email: String(userLogin.email),
+    };
+    setOrders(data);
+  };
+  useEffect(() => {
+    renderOrderProduct();
+  }, [userCart]);
+  const handleSubmitOrder = () => {
+    const actionAsync = submitOrderApi(orders);
+    dispatch(actionAsync);
+  };
   return (
     <>
       <table className="table">
@@ -55,7 +78,7 @@ export default function CartBody() {
                   <button
                     className={styles["btn-quantity"]}
                     onClick={() => {
-                      const action = updateCart({
+                      const action = updateCartAction({
                         id: item.id,
                         value: 1,
                       });
@@ -76,7 +99,7 @@ export default function CartBody() {
                   <button
                     className={styles["btn-quantity"]}
                     onClick={() => {
-                      const action = updateCart({
+                      const action = updateCartAction({
                         id: item.id,
                         value: -1,
                       });
@@ -92,7 +115,7 @@ export default function CartBody() {
                   <button
                     className={styles["btn-delete"]}
                     onClick={() => {
-                      const action = deleteProductCart({
+                      const action = deleteProductCartAction({
                         id: item.id,
                       });
                       dispatch(action);
@@ -106,7 +129,12 @@ export default function CartBody() {
           })}
         </tbody>
       </table>
-      <button className={styles["btn-submit-order"]}>Submit Order</button>
+      <button
+        className={styles["btn-submit-order"]}
+        onClick={handleSubmitOrder}
+      >
+        Submit Order
+      </button>
     </>
   );
 }
