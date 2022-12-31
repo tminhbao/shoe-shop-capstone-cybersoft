@@ -7,7 +7,7 @@ import { getProfileApi } from "../../redux/reducers/userReducer";
 
 export default function ProfileBody() {
   const [isActiveTab, setIsActiveTab] = useState(1);
-  const { userProfile } = useSelector((state) => state.userReducer);
+  const { userProfile, userOrder } = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
   useEffect(() => {
     const actionSync = getProfileApi();
@@ -204,9 +204,9 @@ export default function ProfileBody() {
           id="Tab01"
           className={isActiveTab === 1 ? "tab01 d-block" : "tab01 d-none"}
         >
-          <p className="mt-5 order-title">
+          {/* <p className="mt-5 order-title">
             + Orders have been placed on 09 - 19 - 2020
-          </p>
+          </p> */}
           <table className="table">
             <thead
               style={{
@@ -223,67 +223,30 @@ export default function ProfileBody() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>
-                  <img src={pictureProduct} alt="" />
-                </td>
-                <td>Product 1</td>
-                <td>1000</td>
-                <td>
-                  <span
-                    className="quantity"
-                    style={{
-                      background: "#D9D9D9",
-                      padding: "2px 30px",
-                    }}
-                  >
-                    1
-                  </span>
-                </td>
-                <td>1000</td>
-              </tr>
-            </tbody>
-          </table>
-          <p className="mt-5 order-title">
-            + Orders have been placed on 09 - 19 - 2020
-          </p>
-          <table className="table">
-            <thead
-              style={{
-                background: "#D9D9D9",
-              }}
-            >
-              <tr>
-                <th>id</th>
-                <th>img</th>
-                <th>name</th>
-                <th>price</th>
-                <th>quantity</th>
-                <th>total</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>
-                  <img src={pictureProduct} alt="" />
-                </td>
-                <td>Product 1</td>
-                <td>1000</td>
-                <td>
-                  <span
-                    className="quantity"
-                    style={{
-                      background: "#D9D9D9",
-                      padding: "2px 30px",
-                    }}
-                  >
-                    1
-                  </span>
-                </td>
-                <td>1000</td>
-              </tr>
+              {userOrder.map((item, index) => {
+                return (
+                  <tr key={index}>
+                    <td>{item.id}</td>
+                    <td>
+                      <img src={item.image} alt="" />
+                    </td>
+                    <td>{item.name}</td>
+                    <td>{item.price}</td>
+                    <td>
+                      <span
+                        className="quantity"
+                        style={{
+                          background: "#D9D9D9",
+                          padding: "2px 30px",
+                        }}
+                      >
+                        {item.quantity}
+                      </span>
+                    </td>
+                    <td>{item.price * item.quantity}</td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
           <Pagination

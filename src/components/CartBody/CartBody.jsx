@@ -6,12 +6,12 @@ import {
   submitOrderApi,
   updateCartAction,
 } from "../../redux/reducers/userReducer";
-import { USER_LOGIN } from "../../util/config";
 import styles from "./CartBody.module.css";
 
 export default function CartBody() {
   const dispatch = useDispatch();
   const { userCart, userLogin } = useSelector((state) => state.userReducer);
+
   const [orders, setOrders] = useState();
   const renderOrderProduct = () => {
     let arrOrders = userCart.map((item) => {
@@ -27,9 +27,19 @@ export default function CartBody() {
     };
     setOrders(data);
   };
+
+  const handleUpdateCartQuantity = (idProduct, value) => {
+    const action = updateCartAction({
+      id: idProduct,
+      value: value,
+    });
+    dispatch(action);
+  };
+
   useEffect(() => {
     renderOrderProduct();
   }, [userCart]);
+
   const handleSubmitOrder = () => {
     const actionAsync = submitOrderApi(orders);
     dispatch(actionAsync);
@@ -78,11 +88,7 @@ export default function CartBody() {
                   <button
                     className={styles["btn-quantity"]}
                     onClick={() => {
-                      const action = updateCartAction({
-                        id: item.id,
-                        value: 1,
-                      });
-                      dispatch(action);
+                      handleUpdateCartQuantity(item.product.id, 1);
                     }}
                   >
                     +
@@ -99,11 +105,7 @@ export default function CartBody() {
                   <button
                     className={styles["btn-quantity"]}
                     onClick={() => {
-                      const action = updateCartAction({
-                        id: item.id,
-                        value: -1,
-                      });
-                      dispatch(action);
+                      handleUpdateCartQuantity(item.product.id, -1);
                     }}
                   >
                     -

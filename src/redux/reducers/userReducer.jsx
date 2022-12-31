@@ -6,8 +6,9 @@ const initialState = {
   userLogin: JSON.parse(localStorage.getItem(USER_LOGIN)) || null,
   userProfile: null,
   userRegister: null,
-  userCart: [],
+  userCart: [], // {product:{id:...},quantity}
   userOrder: [],
+  userLikedProduct: [],
 };
 
 const userReducer = createSlice({
@@ -29,7 +30,7 @@ const userReducer = createSlice({
     updateCartAction: (state, action) => {
       const { id, value } = action.payload;
       const updateProductIndex = state.userCart.findIndex(
-        (item) => item.id === id
+        (item) => item.product.id === id
       );
       if (state.userCart[updateProductIndex].quantity === 1 && value === -1) {
         state.userCart = state.userCart.filter((item) => item.id !== id);
@@ -44,6 +45,9 @@ const userReducer = createSlice({
     submitOrderAction: (state, action) => {
       state.userOrder.push(action.payload);
     },
+    getUserLikedProductAction: (state, action) => {
+      state.userLikedProduct.push(action.payload);
+    },
   },
 });
 
@@ -55,6 +59,7 @@ export const {
   updateCartAction,
   deleteProductCartAction,
   submitOrderAction,
+  getUserLikedProductAction,
 } = userReducer.actions;
 
 export default userReducer.reducer;

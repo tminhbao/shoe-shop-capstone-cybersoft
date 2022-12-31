@@ -3,8 +3,7 @@ import { NavLink } from "react-router-dom";
 import "../../assets/sass/components/productFeature/cardItem.scss";
 
 const CardItem = ({ item }) => {
-  const [style1, setStyle1] = useState("fa-regular fa-heart");
-  const [style2, setStyle2] = useState("fa-solid fa-heart");
+  const [liked, setLiked] = useState(false);
 
   return (
     <div className="card">
@@ -12,12 +11,13 @@ const CardItem = ({ item }) => {
       <div
         className="heart-icon"
         onClick={() => {
-          const i = style1;
-          setStyle1(style2);
-          setStyle2(i);
+          setLiked(!liked);
         }}
+        style={{ cursor: "pointer" }}
       >
-        <i className={style1}></i>
+        <i
+          className={liked ? "fa-solid fa-heart " : "fa-regular fa-heart "}
+        ></i>
       </div>
       <div className="card-body">
         <h5 className="card-title">{item.name}</h5>
