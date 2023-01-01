@@ -9,8 +9,6 @@ export default function OrderHistory() {
     const actionSync = getUserOrderHistoryApi();
     dispatch(actionSync);
   }, []);
-  console.log("first");
-  console.log(userOrderHistory);
   return (
     <div>
       {userOrderHistory?.map((item, index) => {

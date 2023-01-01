@@ -1,10 +1,25 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import "../../assets/sass/components/productFeature/cardItem.scss";
+import { http } from "../../util/config";
 
 const CardItem = ({ item }) => {
+  const { userLogin } = useSelector((state) => state.userReducer);
   const [liked, setLiked] = useState(false);
-
+  const dispatch = useDispatch();
+  const handleLike = (idProduct) => {
+    axios({
+      url: `https://shop.cyberlearn.vn/api/Users/like?productId=${idProduct}`,
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${userLogin.accessToken}`,
+      },
+    })
+      .then((res) => console.log(res.data.content))
+      .catch((err) => console.log(err));
+  };
   return (
     <div className="card">
       <img className="px-5 pt-4 w-100" src={item.image} alt="..." />
@@ -12,6 +27,7 @@ const CardItem = ({ item }) => {
         className="heart-icon"
         onClick={() => {
           setLiked(!liked);
+          handleLike(item.id);
         }}
         style={{ cursor: "pointer" }}
       >

@@ -9,6 +9,7 @@ const initialState = {
   userCart: [], // {product:{id:...},quantity}
   userOrder: [],
   userLikedProduct: [],
+  userUnlikedProduct: [],
   userOrderHistory: [],
 };
 
@@ -47,7 +48,10 @@ const userReducer = createSlice({
       state.userOrder.push(action.payload);
     },
     getUserLikedProductAction: (state, action) => {
-      state.userLikedProduct.push(action.payload);
+      state.userLikedProduct = action.payload;
+    },
+    getUserUnlikedProductAction: (state, action) => {
+      state.userUnlikedProduct = action.payload;
     },
     getUserOrderHistoryAction: (state, action) => {
       state.userOrderHistory = action.payload;
@@ -64,6 +68,7 @@ export const {
   deleteProductCartAction,
   submitOrderAction,
   getUserLikedProductAction,
+  getUserUnlikedProductAction,
   getUserOrderHistoryAction,
 } = userReducer.actions;
 
@@ -124,6 +129,16 @@ export const submitOrderApi = (data) => {
     const result = await http.post("/api/Users/order", data);
     alert(result.data.content);
     const action = submitOrderAction(data.orderDetail);
+    dispatch(action);
+  };
+};
+
+export const getUserLikedProductApi = () => {
+  return async (dispatch) => {
+    const result = await http.get("/api/Users/getproductfavorite");
+    const action = getUserLikedProductAction(
+      result.data.content.productsFavorite
+    );
     dispatch(action);
   };
 };

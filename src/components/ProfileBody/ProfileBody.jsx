@@ -5,6 +5,7 @@ import { Pagination } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfileApi } from "../../redux/reducers/userReducer";
 import OrderHistory from "../OrderHistory/OrderHistory";
+import FavoriteProduct from "../FavoriteProduct/FavoriteProduct";
 
 export default function ProfileBody() {
   const [isActiveTab, setIsActiveTab] = useState(1);
@@ -218,8 +219,7 @@ export default function ProfileBody() {
           id="Tab02"
           className={isActiveTab === 2 ? "tab02 d-block" : "tab02 d-none"}
         >
-          <h2>Tab02</h2>
-          <p>Tab02 is the capital of England.</p>
+          <FavoriteProduct />
         </div>
       </div>
     </div>

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import pictureProduct from "../../assets/img/image5.png";
 import {
   deleteProductCartAction,
   submitOrderApi,
@@ -11,7 +10,6 @@ import styles from "./CartBody.module.css";
 export default function CartBody() {
   const dispatch = useDispatch();
   const { userCart, userLogin } = useSelector((state) => state.userReducer);
-
   const [orders, setOrders] = useState();
   const renderOrderProduct = () => {
     let arrOrders = userCart.map((item) => {
