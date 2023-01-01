@@ -56,6 +56,9 @@ const userReducer = createSlice({
     getUserOrderHistoryAction: (state, action) => {
       state.userOrderHistory = action.payload;
     },
+    updateUserProfileAction: (state, action) => {
+      state.userProfile = action.payload;
+    },
   },
 });
 
@@ -70,6 +73,7 @@ export const {
   getUserLikedProductAction,
   getUserUnlikedProductAction,
   getUserOrderHistoryAction,
+  updateUserProfileAction,
 } = userReducer.actions;
 
 export default userReducer.reducer;
@@ -147,6 +151,15 @@ export const getUserOrderHistoryApi = () => {
   return async (dispatch) => {
     const result = await http.post("/api/Users/getProfile");
     const action = getUserOrderHistoryAction(result.data.content.ordersHistory);
+    dispatch(action);
+  };
+};
+
+export const updateUserProfileApi = (userUpdate) => {
+  return async (dispatch) => {
+    const result = await http.post("/api/Users/updateProfile", userUpdate);
+    alert(result.data.content);
+    const action = updateUserProfileAction(userUpdate);
     dispatch(action);
   };
 };
