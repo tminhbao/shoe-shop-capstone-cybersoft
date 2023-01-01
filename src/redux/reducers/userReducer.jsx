@@ -1,31 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { http, USER_LOGIN, ACCESS_TOKEN } from "../../util/config";
 import { history } from "../../index";
-import axios from "axios";
 
 const initialState = {
   userLogin: JSON.parse(localStorage.getItem(USER_LOGIN)) || null,
   userProfile: null,
   userRegister: null,
-  userCart: [
-    {
-      id: 12,
-      name: "Nike Air Max 270 React",
-      alias: "nike-air-max-270-react",
-      price: 750,
-      description:
-        "Nike shoe is the rare high-percentage shooter who's also a coach's dream on D. Designed for his unrivaled 2-way game, the PG 4 unveils a new cushioning system that's lightweight, articulated and responsive, ideal for players like PG who go hard every play.\r\n\r\n",
-      size: "[36,37,38,39,40,41,42]",
-      shortDescription: "Paul George is the rare high-percentage shooter",
-      quantity: 445,
-      deleted: false,
-      categories:
-        '[{"id":"NIKE","category":"NIKE"},{"id":"MEN","category":"MEN"},{"id":"WOMEN","category":"WOMEN"}]',
-      relatedProducts: "[11,9,15,16]",
-      feature: false,
-      image: "https://shop.cyberlearn.vn/images/nike-air-max-270-react.png",
-    },
-  ],
+  userCart: [], // {product:{id:...},quantity}
+  userOrder: [],
+  userLikedProduct: [],
+  userUnlikedProduct: [],
+  userOrderHistory: [],
 };
 
 const userReducer = createSlice({
@@ -41,11 +26,51 @@ const userReducer = createSlice({
     registerAction: (state, action) => {
       state.userRegister = action.payload;
     },
+    getUserCartAction: (state, action) => {
+      state.userCart.push(action.payload);
+    },
+    updateCartAction: (state, action) => {
+      const { id, value } = action.payload;
+      const updateProductIndex = state.userCart.findIndex(
+        (item) => item.product.id === id
+      );
+      if (state.userCart[updateProductIndex].quantity === 1 && value === -1) {
+        state.userCart = state.userCart.filter((item) => item.id !== id);
+      } else {
+        state.userCart[updateProductIndex].quantity += value;
+      }
+    },
+    deleteProductCartAction: (state, action) => {
+      const { id } = action.payload;
+      state.userCart = state.userCart.filter((item) => item.id !== id);
+    },
+    submitOrderAction: (state, action) => {
+      state.userOrder.push(action.payload);
+    },
+    getUserLikedProductAction: (state, action) => {
+      state.userLikedProduct = action.payload;
+    },
+    getUserUnlikedProductAction: (state, action) => {
+      state.userUnlikedProduct = action.payload;
+    },
+    getUserOrderHistoryAction: (state, action) => {
+      state.userOrderHistory = action.payload;
+    },
   },
 });
 
-export const { loginAction, getProfileAction, registerAction } =
-  userReducer.actions;
+export const {
+  loginAction,
+  getProfileAction,
+  registerAction,
+  getUserCartAction,
+  updateCartAction,
+  deleteProductCartAction,
+  submitOrderAction,
+  getUserLikedProductAction,
+  getUserUnlikedProductAction,
+  getUserOrderHistoryAction,
+} = userReducer.actions;
 
 export default userReducer.reducer;
 
@@ -68,16 +93,7 @@ export const loginApi = (userLogin) => {
 export const loginFacebookApi = (facebookToken) => {
   return async (dispatch) => {
     const result = await http.post("/api/Users/facebooklogin", facebookToken);
-    // const result = await axios({
-    //   url: "https://shop.cyberlearn.vn/api/Users/facebooklogin",
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     charset: "utf-8",
-    //   },
-    //   facebookToken,
-    // });
-    console.log(result.data);
+    console.log(result.data.content);
     const action = loginAction(result.data.content);
     dispatch(action);
     // Lưu trong localStorage
@@ -92,6 +108,7 @@ export const loginFacebookApi = (facebookToken) => {
 export const getProfileApi = () => {
   return async (dispatch) => {
     const result = await http.post("/api/Users/getProfile");
+    console.log(result.data.content);
     const action = getProfileAction(result.data.content);
     dispatch(action);
   };
@@ -104,5 +121,32 @@ export const registerApi = (userRegister) => {
     const action = registerAction(result.data.content);
     dispatch(action);
     history.push("/login");
+  };
+};
+
+export const submitOrderApi = (data) => {
+  return async (dispatch) => {
+    const result = await http.post("/api/Users/order", data);
+    alert(result.data.content);
+    const action = submitOrderAction(data.orderDetail);
+    dispatch(action);
+  };
+};
+
+export const getUserLikedProductApi = () => {
+  return async (dispatch) => {
+    const result = await http.get("/api/Users/getproductfavorite");
+    const action = getUserLikedProductAction(
+      result.data.content.productsFavorite
+    );
+    dispatch(action);
+  };
+};
+
+export const getUserOrderHistoryApi = () => {
+  return async (dispatch) => {
+    const result = await http.post("/api/Users/getProfile");
+    const action = getUserOrderHistoryAction(result.data.content.ordersHistory);
+    dispatch(action);
   };
 };

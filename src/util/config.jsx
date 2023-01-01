@@ -40,7 +40,7 @@ http.interceptors.response.use(
       //chuyển hướng về home
       history.push("/");
     }
-    if (err.response?.status === 401 || err.response.status == 403) {
+    if (err.response?.status === 401 || err.response.status === 403) {
       const isMyTokenExpired = isExpired(localStorage.getItem("access_token"));
       console.log(localStorage.getItem("access_token"));
       console.log("isMyTokenExpired", isMyTokenExpired);

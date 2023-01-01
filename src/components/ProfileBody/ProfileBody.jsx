@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import "./ProfileBody.css";
-import picture from "../../assets/img/download.png";
 import pictureProduct from "../../assets/img/image5.png";
 import { Pagination } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfileApi } from "../../redux/reducers/userReducer";
+import OrderHistory from "../OrderHistory/OrderHistory";
+import FavoriteProduct from "../FavoriteProduct/FavoriteProduct";
+import { history } from "../../index";
 
 export default function ProfileBody() {
   const [isActiveTab, setIsActiveTab] = useState(1);
-  const { userProfile } = useSelector((state) => state.userReducer);
+  const { userProfile, userLogin } = useSelector((state) => state.userReducer);
+  if (!userLogin) history.push("/login");
   const dispatch = useDispatch();
   useEffect(() => {
     const actionSync = getProfileApi();
@@ -205,88 +208,7 @@ export default function ProfileBody() {
           id="Tab01"
           className={isActiveTab === 1 ? "tab01 d-block" : "tab01 d-none"}
         >
-          <p className="mt-5 order-title">
-            + Orders have been placed on 09 - 19 - 2020
-          </p>
-          <table className="table">
-            <thead
-              style={{
-                background: "#D9D9D9",
-              }}
-            >
-              <tr>
-                <th>id</th>
-                <th>img</th>
-                <th>name</th>
-                <th>price</th>
-                <th>quantity</th>
-                <th>total</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>
-                  <img src={pictureProduct} alt="" />
-                </td>
-                <td>Product 1</td>
-                <td>1000</td>
-                <td>
-                  <span
-                    className="quantity"
-                    style={{
-                      background: "#D9D9D9",
-                      padding: "2px 30px",
-                    }}
-                  >
-                    1
-                  </span>
-                </td>
-                <td>1000</td>
-              </tr>
-            </tbody>
-          </table>
-          <p className="mt-5 order-title">
-            + Orders have been placed on 09 - 19 - 2020
-          </p>
-          <table className="table">
-            <thead
-              style={{
-                background: "#D9D9D9",
-              }}
-            >
-              <tr>
-                <th>id</th>
-                <th>img</th>
-                <th>name</th>
-                <th>price</th>
-                <th>quantity</th>
-                <th>total</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>
-                  <img src={pictureProduct} alt="" />
-                </td>
-                <td>Product 1</td>
-                <td>1000</td>
-                <td>
-                  <span
-                    className="quantity"
-                    style={{
-                      background: "#D9D9D9",
-                      padding: "2px 30px",
-                    }}
-                  >
-                    1
-                  </span>
-                </td>
-                <td>1000</td>
-              </tr>
-            </tbody>
-          </table>
+          <OrderHistory />
           <Pagination
             defaultCurrent={1}
             total={50}
@@ -299,8 +221,7 @@ export default function ProfileBody() {
           id="Tab02"
           className={isActiveTab === 2 ? "tab02 d-block" : "tab02 d-none"}
         >
-          <h2>Tab02</h2>
-          <p>Tab02 is the capital of England.</p>
+          <FavoriteProduct />
         </div>
       </div>
     </div>

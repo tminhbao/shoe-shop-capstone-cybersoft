@@ -69,11 +69,15 @@ const Header = () => {
               </div>
             </div>
             <div>
-              <NavLink className="btn text-light" to="/cart">
-                <i className="fa fa-cart-arrow-down">
-                  <span className="ms-1">(1)</span>
-                </i>
-              </NavLink>
+              {userLogin ? (
+                <NavLink className="btn text-light" to="/cart">
+                  <i className="fa fa-cart-arrow-down">
+                    <span className="ms-1"></span>
+                  </i>
+                </NavLink>
+              ) : (
+                ""
+              )}
               {userProfile ? (
                 <React.Fragment>
                   <NavLink

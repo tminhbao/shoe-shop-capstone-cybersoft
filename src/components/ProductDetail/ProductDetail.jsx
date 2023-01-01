@@ -1,7 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "../../assets/sass/components/productDetail/productDetail.scss";
+import { getUserCartAction } from "../../redux/reducers/userReducer";
 
 const ProductDetail = ({ productDetail }) => {
+  const { userCart } = useSelector((state) => state.userReducer);
+  const [quantity, setQuatity] = useState(1);
+  const dispatch = useDispatch();
+  const handleChange = (e) => {
+    let { value } = e.target;
+    if (value < 0 || value === null) {
+      value = 0;
+    }
+    setQuatity(value);
+  };
+  const handleClick = (num) => {
+    let value = Number(quantity) + num;
+    if (value < 0) {
+      value = 0;
+    }
+    setQuatity(value);
+  };
+  const handleCart = () => {
+    const index = userCart.findIndex(
+      (item) => item.product.id === productDetail.id
+    );
+    if (index === -1) {
+      const action = getUserCartAction({
+        product: productDetail,
+        quantity: quantity,
+      });
+      dispatch(action);
+    }
+  };
   return (
     <div className="productDetail">
       <div className="container">
@@ -30,15 +61,39 @@ const ProductDetail = ({ productDetail }) => {
                   <h4>{productDetail?.price}$</h4>
                 </div>
                 <div className="input">
-                  <button className="btn num-box">+</button>
+                  <button
+                    className="btn num-box"
+                    onClick={() => {
+                      handleClick(1);
+                    }}
+                  >
+                    +
+                  </button>
                   <input
-                    className="input-num mx-2 text-center"
+                    className="input-num mx-2 py-2 text-center"
                     type="number"
-                    min={0}
+                    value={quantity}
+                    onChange={(e) => {
+                      handleChange(e);
+                    }}
                   />
-                  <button className="btn num-box">-</button>
+                  <button
+                    className="btn num-box"
+                    onClick={() => {
+                      handleClick(-1);
+                    }}
+                  >
+                    -
+                  </button>
                 </div>
-                <button className="btn add-box mt-3">Add to cart</button>
+                <button
+                  className="btn add-box mt-3"
+                  onClick={() => {
+                    handleCart();
+                  }}
+                >
+                  Add to cart
+                </button>
               </div>
             </div>
           </div>
