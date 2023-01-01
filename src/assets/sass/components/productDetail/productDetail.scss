@@ -50,3 +50,17 @@
         }
     }
 }
+
+@media only screen and (max-width: 992px) {
+    .productDetail {
+        align-self: center;
+        .item-left {
+            width: 100%;
+        }
+
+        .item-right {
+            margin-top: -80px;
+            width: 100%;
+        }
+    }
+}

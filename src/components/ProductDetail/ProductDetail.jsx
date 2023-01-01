@@ -39,17 +39,17 @@ const ProductDetail = ({ productDetail }) => {
       <div className="container">
         <div className="d-lg-flex d-md-flex">
           <div className="item-left p-5">
-            <div className="img-item p-3 w-100">
+            <div className="img-item w-100">
               <img className="p-5 w-100" src={productDetail?.image} alt="..." />
             </div>
           </div>
           <div className="item-right p-5">
-            <div className="info">
+            <div className="info w-100">
               <h3 className="name">{productDetail?.name}</h3>
               <p className="description">{productDetail?.description}</p>
               <div className="size">
                 <h4 className="title">Available size</h4>
-                <div className="size-list d-flex">
+                <div className="size-list">
                   {productDetail?.size.map((item, i) => {
                     return (
                       <button className={`size-box mx-1 my-3 btn ${isActive === i ? 'active' : null}`} key={i} onClick={() => {
