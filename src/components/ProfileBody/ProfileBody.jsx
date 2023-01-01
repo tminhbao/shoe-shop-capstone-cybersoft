@@ -6,10 +6,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProfileApi } from "../../redux/reducers/userReducer";
 import OrderHistory from "../OrderHistory/OrderHistory";
 import FavoriteProduct from "../FavoriteProduct/FavoriteProduct";
+import { history } from "../../index";
 
 export default function ProfileBody() {
   const [isActiveTab, setIsActiveTab] = useState(1);
-  const { userProfile, userOrder } = useSelector((state) => state.userReducer);
+  const { userProfile, userLogin } = useSelector((state) => state.userReducer);
+  if (!userLogin) history.push("/login");
   const dispatch = useDispatch();
   useEffect(() => {
     const actionSync = getProfileApi();

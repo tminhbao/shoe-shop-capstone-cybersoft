@@ -17,7 +17,9 @@ const CardItem = ({ item }) => {
         Authorization: `Bearer ${userLogin.accessToken}`,
       },
     })
-      .then((res) => console.log(res.data.content))
+      .then((res) => {
+        console.log(res.data.content);
+      })
       .catch((err) => console.log(err));
   };
   return (
