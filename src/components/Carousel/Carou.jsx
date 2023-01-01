@@ -37,7 +37,7 @@ const Carou = () => {
     };
 
     return (
-        <div className='d-lg-flex d-md-flex d-sm-flex d-none'>
+        <div>
             <Slider {...settings} >
                 {carousel?.map((item, i) => {
                     return <div className='carousel' key={i}>
