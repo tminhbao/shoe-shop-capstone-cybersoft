@@ -4,6 +4,7 @@ import "../../assets/sass/components/productDetail/productDetail.scss";
 import { getUserCartAction } from "../../redux/reducers/userReducer";
 
 const ProductDetail = ({ productDetail }) => {
+  const [isActive, setIsActive] = useState()
   const { userCart } = useSelector((state) => state.userReducer);
   const [quantity, setQuatity] = useState(1);
   const dispatch = useDispatch();
@@ -51,7 +52,9 @@ const ProductDetail = ({ productDetail }) => {
                 <div className="size-list d-flex">
                   {productDetail?.size.map((item, i) => {
                     return (
-                      <button className="size-box mx-1 my-3 btn" key={i}>
+                      <button className={`size-box mx-1 my-3 btn ${isActive === i ? 'active' : null}`} key={i} onClick={() => {
+                        setIsActive(i)
+                      }}>
                         {item}
                       </button>
                     );

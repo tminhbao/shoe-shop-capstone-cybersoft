@@ -1,36 +1,50 @@
 @import '../../index.scss';
 
-.productDetail{
-    .item-left{
+.productDetail {
+    .item-left {
         width: 40%;
-        .img-item{
+
+        .img-item {
             background: $bg-c2-light;
         }
     }
-    .item-right{
+
+    .item-right {
         width: 60%;
-        .size{
-            .title{
+
+        .size {
+            .title {
                 color: $text-c1-success;
             }
-            .size-box{
+
+            .size-box {
                 background: $bg-c3-secondary;
+                opacity: 0.5;
+
+                &.active {
+                    opacity: 1;
+                }
             }
+
         }
-        .price{
+
+        .price {
             color: $text-c2-danger;
         }
-        .input{
-            .num-box{
+
+        .input {
+            .num-box {
                 background: $linear-2;
                 color: $text-c1-light;
             }
-            .input-num{
+
+            .input-num {
                 width: 3rem;
                 border: none;
             }
         }
-        .add-box{
+
+        .add-box {
             background: $linear-3;
             color: $text-c1-light;
         }
