@@ -88,6 +88,18 @@ const Header = () => {
                     Hello, {userProfile?.name}
                   </NavLink>
                   <NavLink
+                    to="/changepassword"
+                    className="text-black bg-white"
+                    style={{
+                      fontWeight: "bold",
+                      padding: "10px 14px",
+                      borderRadius: "10px",
+                      margin: "10px",
+                    }}
+                  >
+                    Change Password
+                  </NavLink>
+                  <NavLink
                     className="btn text-light"
                     onClick={() => {
                       localStorage.removeItem(USER_LOGIN);

@@ -22,6 +22,7 @@ import HomeTemplate from "./templates/HomeTemplate/HomeTemplate";
 // SASS
 import "./assets/sass/index.scss";
 import { createBrowserHistory } from "history";
+import ChangePassword from "./components/ChangePassword/ChangePassword";
 
 export const history = createBrowserHistory();
 
@@ -40,6 +41,7 @@ root.render(
           <Route path="detail">
             <Route path=":id" element={<Detail />} />
           </Route>
+          <Route path="/changepassword" element={<ChangePassword />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Route>
       </Routes>

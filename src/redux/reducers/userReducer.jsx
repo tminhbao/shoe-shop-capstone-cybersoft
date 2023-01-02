@@ -3,7 +3,7 @@ import { http, USER_LOGIN, ACCESS_TOKEN } from "../../util/config";
 import { history } from "../../index";
 
 const initialState = {
-  userLogin: JSON.parse(localStorage.getItem(USER_LOGIN)) || null,
+  userLogin: null,
   userProfile: null,
   userRegister: null,
   userCart: [], // {product:{id:...},quantity}
@@ -56,6 +56,9 @@ const userReducer = createSlice({
     getUserOrderHistoryAction: (state, action) => {
       state.userOrderHistory = action.payload;
     },
+    updateUserProfileAction: (state, action) => {
+      state.userProfile = action.payload;
+    },
   },
 });
 
@@ -70,6 +73,7 @@ export const {
   getUserLikedProductAction,
   getUserUnlikedProductAction,
   getUserOrderHistoryAction,
+  updateUserProfileAction,
 } = userReducer.actions;
 
 export default userReducer.reducer;
@@ -148,5 +152,25 @@ export const getUserOrderHistoryApi = () => {
     const result = await http.post("/api/Users/getProfile");
     const action = getUserOrderHistoryAction(result.data.content.ordersHistory);
     dispatch(action);
+  };
+};
+
+export const updateUserProfileApi = (userUpdate) => {
+  return async (dispatch) => {
+    const result = await http.post("/api/Users/updateProfile", userUpdate);
+    alert(result.data.content);
+    const action = updateUserProfileAction(userUpdate);
+    dispatch(action);
+  };
+};
+
+export const changePasswordApi = (newPassword) => {
+  return async (dispatch) => {
+    const result = await http.post("/api/Users/changePassword", newPassword);
+    alert(result.data.content);
+    localStorage.removeItem(USER_LOGIN);
+    localStorage.removeItem(ACCESS_TOKEN);
+    window.location.reload();
+    history.push("/login");
   };
 };

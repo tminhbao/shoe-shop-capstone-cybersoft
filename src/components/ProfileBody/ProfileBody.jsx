@@ -1,17 +1,57 @@
 import React, { useEffect, useState } from "react";
 import "./ProfileBody.css";
-import pictureProduct from "../../assets/img/image5.png";
 import { Pagination } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { getProfileApi } from "../../redux/reducers/userReducer";
+import {
+  getProfileApi,
+  updateUserProfileApi,
+} from "../../redux/reducers/userReducer";
 import OrderHistory from "../OrderHistory/OrderHistory";
 import FavoriteProduct from "../FavoriteProduct/FavoriteProduct";
 import { history } from "../../index";
+import { useFormik } from "formik";
+import * as yup from "yup";
+import axios from "axios";
 
 export default function ProfileBody() {
   const [isActiveTab, setIsActiveTab] = useState(1);
   const { userProfile, userLogin } = useSelector((state) => state.userReducer);
   if (!userLogin) history.push("/login");
+  const formUpdate = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+      name: "",
+      gender: "",
+      phone: "",
+    },
+    validationSchema: yup.object().shape({
+      email: yup
+        .string()
+        .required("email cannot be empty")
+        .email("email is invalid"),
+      password: yup
+        .string()
+        .required("password cannot be empty")
+        .min(6, "password must be at least 6 characters"),
+      name: yup.string().required("name cannot be empty").max(50),
+      gender: yup.bool().required("gender cannot be empty"),
+      phone: yup.string().required("phone cannot be empty"),
+    }),
+    onSubmit: (values) => {
+      let { email, password, name, gender, phone } = values;
+      let genderValue = gender === "true";
+      let data = {
+        email,
+        password,
+        name,
+        gender: genderValue,
+        phone,
+      };
+      const action = updateUserProfileApi(data);
+      dispatch(action);
+    },
+  });
   const dispatch = useDispatch();
   useEffect(() => {
     const actionSync = getProfileApi();
@@ -27,7 +67,10 @@ export default function ProfileBody() {
           </div>
         </div>
         <div className="col-9">
-          <div className="form-wrapper-register">
+          <form
+            className="form-wrapper-register"
+            onSubmit={formUpdate.handleSubmit}
+          >
             <div className="row mt-5 row-input-register">
               <div className="col-6">
                 <div className="form-group w-75">
@@ -49,8 +92,15 @@ export default function ProfileBody() {
                       alignSelf: "stretch",
                       flexGrow: 0,
                     }}
-                    value={userProfile?.email}
+                    defaultValue={userProfile?.email}
+                    onChange={formUpdate.handleChange}
+                    onBlur={formUpdate.handleBlur}
                   />
+                  {formUpdate.errors.email && (
+                    <small className="text-danger">
+                      {formUpdate.errors.email}
+                    </small>
+                  )}
                 </div>
               </div>
               <div className="col-6">
@@ -74,8 +124,15 @@ export default function ProfileBody() {
                       flexGrow: 0,
                     }}
                     type="text"
-                    value={userProfile?.name}
+                    defaultValue={userProfile?.name}
+                    onChange={formUpdate.handleChange}
+                    onBlur={formUpdate.handleBlur}
                   />
+                  {formUpdate.errors.name && (
+                    <small className="text-danger">
+                      {formUpdate.errors.name}
+                    </small>
+                  )}
                 </div>
               </div>
             </div>
@@ -101,8 +158,15 @@ export default function ProfileBody() {
                       flexGrow: 0,
                     }}
                     type="text"
-                    value={userProfile?.phone}
+                    defaultValue={userProfile?.phone}
+                    onChange={formUpdate.handleChange}
+                    onBlur={formUpdate.handleBlur}
                   />
+                  {formUpdate.errors.phone && (
+                    <small className="text-danger">
+                      {formUpdate.errors.phone}
+                    </small>
+                  )}
                 </div>
               </div>
               <div className="col-6">
@@ -126,8 +190,15 @@ export default function ProfileBody() {
                       flexGrow: 0,
                     }}
                     type="text"
-                    value={userProfile?.password}
+                    defaultValue={userProfile?.password}
+                    onChange={formUpdate.handleChange}
+                    onBlur={formUpdate.handleBlur}
                   />
+                  {formUpdate.errors.password && (
+                    <small className="text-danger">
+                      {formUpdate.errors.password}
+                    </small>
+                  )}
                 </div>
               </div>
             </div>
@@ -158,8 +229,11 @@ export default function ProfileBody() {
                       name="gender"
                       defaultValue="true"
                       className="mx-2"
-                      checked={userProfile?.gender}
+                      defaultChecked={userProfile?.gender}
+                      onChange={formUpdate.handleChange}
+                      onBlur={formUpdate.handleBlur}
                     />
+
                     <label htmlFor="male">Male</label>
                     <input
                       type="radio"
@@ -167,10 +241,17 @@ export default function ProfileBody() {
                       name="gender"
                       defaultValue="false"
                       className="mx-2"
-                      checked={!userProfile?.gender}
+                      defaultChecked={!userProfile?.gender}
+                      onChange={formUpdate.handleChange}
+                      onBlur={formUpdate.handleBlur}
                     />
                     <label htmlFor="female">Female</label>
                   </div>
+                  {formUpdate.errors.gender && (
+                    <small className="text-danger">
+                      {formUpdate.errors.gender}
+                    </small>
+                  )}
                   <div
                     className="gender-update-button"
                     style={{
@@ -184,7 +265,7 @@ export default function ProfileBody() {
                 </div>
               </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
       <hr width="90%" style={{ margin: "0 auto", marginTop: "30px" }} />
