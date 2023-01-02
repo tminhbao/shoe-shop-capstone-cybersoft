@@ -48,3 +48,13 @@ export const getProductDetailApi = (id) => {
     dispacth(actionDetail);
   };
 };
+
+export const getProductDetailPagingApi = (pageIndex, pageSize) => {
+  return async (dispatch) => {
+    const result = await http.get(
+      `/api/Product/getpaging?pageIndex=${pageIndex}&pageSize=${pageSize}`
+    );
+    const actionProduct = getProduct(result.data.content.items);
+    dispatch(actionProduct);
+  };
+};

@@ -3,7 +3,7 @@ import { http, USER_LOGIN, ACCESS_TOKEN } from "../../util/config";
 import { history } from "../../index";
 
 const initialState = {
-  userLogin: JSON.parse(localStorage.getItem(USER_LOGIN)) || null,
+  userLogin: null,
   userProfile: null,
   userRegister: null,
   userCart: [], // {product:{id:...},quantity}
