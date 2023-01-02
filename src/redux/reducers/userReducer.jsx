@@ -163,3 +163,14 @@ export const updateUserProfileApi = (userUpdate) => {
     dispatch(action);
   };
 };
+
+export const changePasswordApi = (newPassword) => {
+  return async (dispatch) => {
+    const result = await http.post("/api/Users/changePassword", newPassword);
+    alert(result.data.content);
+    localStorage.removeItem(USER_LOGIN);
+    localStorage.removeItem(ACCESS_TOKEN);
+    window.location.reload();
+    history.push("/login");
+  };
+};
