@@ -31,6 +31,6 @@
 ## Installed Packages
 - UI: sass, bootstrap, google fonts
 
-## [Video Demo](https://youtu.be/MPkeOyYuA54)
+## [Video Demo](https://youtu.be/JDVY1SawhkA)
 
 ## [Link Deploy](https://shoe-shop-capstone-fe73.surge.sh/)
