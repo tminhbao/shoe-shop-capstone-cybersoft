@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import FacebookLogin from "react-facebook-login";
 import { useDispatch } from "react-redux";
 import { loginFacebookApi } from "../../redux/reducers/userReducer";

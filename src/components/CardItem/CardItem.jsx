@@ -1,14 +1,12 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import "../../assets/sass/components/productFeature/cardItem.scss";
-import { http } from "../../util/config";
 
 const CardItem = ({ item }) => {
   const { userLogin } = useSelector((state) => state.userReducer);
   const [liked, setLiked] = useState(false);
-  const dispatch = useDispatch();
   const handleLike = (idProduct) => {
     axios({
       url: `https://shop.cyberlearn.vn/api/Users/like?productId=${idProduct}`,
@@ -24,15 +22,6 @@ const CardItem = ({ item }) => {
   };
   return (
     <div className="card">
-      {/* <img
-        className="px-5 pt-4 w-100"
-        src={
-          item.image.startsWith("https")
-            ? item.image
-            : `https://shop.cyberlearn.vn/images/${item.image}`
-        }
-        alt="..."
-      /> */}
       <img
         className="px-5 pt-4 w-100"
         src={`https://shop.cyberlearn.vn/images/${item.alias}.png`}

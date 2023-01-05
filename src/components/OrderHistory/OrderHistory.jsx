@@ -11,7 +11,7 @@ export default function OrderHistory() {
   }, []);
   return (
     <div>
-      {userOrderHistory?.map((item, index) => {
+      {userOrderHistory?.map((item) => {
         return (
           <>
             <p>Order have been placed on: {item.date}</p>
@@ -64,30 +64,6 @@ export default function OrderHistory() {
           </>
         );
       })}
-      {/* {userOrderHistory[0]?.map((item) => {
-            return item.orderDetail.map((itemDetail, index) => {
-              <tr key={index}>
-                <td>{itemDetail?.id}</td>
-                <td>
-                  <img src={itemDetail.image} alt="" />
-                </td>
-                <td>{itemDetail.name}</td>
-                <td>{itemDetail.price}</td>
-                <td>
-                  <span
-                    className="quantity"
-                    style={{
-                      background: "#D9D9D9",
-                      padding: "2px 30px",
-                    }}
-                  >
-                    {itemDetail.quantity}
-                  </span>
-                </td>
-                <td>{itemDetail.price * itemDetail.quantity}</td>
-              </tr>;
-            });
-          })} */}
     </div>
   );
 }

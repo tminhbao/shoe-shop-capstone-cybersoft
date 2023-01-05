@@ -20,15 +20,9 @@ const ProductFeature = () => {
   };
 
   useEffect(() => {
-    //getArrProductApi();
     const action = getProductDetailPagingApi(1, ITEM_PER_PAGE);
     dispatch(action);
   }, []);
-
-  const handleClick = (e) => {
-    // do nothing
-    //e.target.classList.add("active");
-  };
 
   return (
     <div className="productFeature py-5">
@@ -45,57 +39,52 @@ const ProductFeature = () => {
           <div class="center">
             <div class="pagination">
               <NavLink
-                onClick={(e) => {
+                onClick={() => {
                   const action = getProductDetailPagingApi(
                     currentPage - 1,
                     ITEM_PER_PAGE
                   );
                   setCurrentPage(currentPage - 1);
                   dispatch(action);
-                  handleClick(e);
                 }}
               >
                 <span>&laquo;</span>
               </NavLink>
               <NavLink
-                onClick={(e) => {
+                onClick={() => {
                   const action = getProductDetailPagingApi(1, ITEM_PER_PAGE);
                   setCurrentPage(1);
                   dispatch(action);
-                  handleClick(e);
                 }}
               >
                 <span className="paging">1</span>
               </NavLink>
               <NavLink
-                onClick={(e) => {
+                onClick={() => {
                   const action = getProductDetailPagingApi(2, ITEM_PER_PAGE);
                   setCurrentPage(2);
                   dispatch(action);
-                  handleClick(e);
                 }}
               >
                 <span className="paging">2</span>
               </NavLink>
               <NavLink
-                onClick={(e) => {
+                onClick={() => {
                   const action = getProductDetailPagingApi(3, ITEM_PER_PAGE);
                   setCurrentPage(3);
                   dispatch(action);
-                  handleClick(e);
                 }}
               >
                 <span className="paging">3</span>
               </NavLink>
               <NavLink
-                onClick={(e) => {
+                onClick={() => {
                   const action = getProductDetailPagingApi(
                     currentPage + 1,
                     ITEM_PER_PAGE
                   );
                   setCurrentPage(currentPage + 1);
                   dispatch(action);
-                  handleClick(e);
                 }}
               >
                 <span>&raquo;</span>

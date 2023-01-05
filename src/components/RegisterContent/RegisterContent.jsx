@@ -222,29 +222,6 @@ export default function RegisterContent() {
             />
             <label htmlFor="female">Female</label>
           </div>
-
-          {/* <div className="form-group w-75">
-            <p className="form-input-title">Password</p>
-            <input
-              placeholder="password"
-              className="w-100"
-              name="password"
-              style={{
-                width: "443px",
-                height: "54px",
-                border: "none",
-                background: "rgba(33, 33, 33, 0.08)",
-                borderRadius: "4px 4px 0px 0px",
-                padding: "16px 12px 14px 14px",
-
-                flex: "none",
-                order: 0,
-                alignSelf: "stretch",
-                flexGrow: 0,
-              }}
-              type="password"
-            />
-          </div> */}
         </div>
       </div>
 

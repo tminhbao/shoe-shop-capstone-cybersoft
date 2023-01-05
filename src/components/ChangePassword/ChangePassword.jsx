@@ -1,11 +1,10 @@
 import { useFormik } from "formik";
 import * as yup from "yup";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { changePasswordApi } from "../../redux/reducers/userReducer";
 
 function ChangePassword() {
-  const { userProfile } = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
   const form = useFormik({
     initialValues: {
