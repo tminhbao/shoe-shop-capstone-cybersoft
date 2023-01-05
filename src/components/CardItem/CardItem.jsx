@@ -24,10 +24,9 @@ const CardItem = ({ item }) => {
   };
   return (
     <div className="card">
-      {/* <img className="px-5 pt-4 w-100" src={item.image} alt="..." /> */}
       <img
         className="px-5 pt-4 w-100"
-        src={`https://shop.cyberlearn.vn/images/${item.image}`}
+        src={`https://shop.cyberlearn.vn/images/${item.alias}.png`}
         alt=""
       />
       <div
