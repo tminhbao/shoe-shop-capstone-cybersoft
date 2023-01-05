@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { http } from "../../util/config";
 
 const initialState = {
+  productPaging: null,
   product: null, // array
   productDetail: null,
   search: "",
@@ -17,6 +18,9 @@ const productReducer = createSlice({
     getSearch: (state, action) => {
       state.search = action.payload;
     },
+    getProductPaging: (state, action) => {
+      state.productPaging = action.payload;
+    },
     getProduct: (state, action) => {
       state.product = action.payload;
     },
@@ -29,7 +33,7 @@ const productReducer = createSlice({
   },
 });
 
-export const { getSearch, getProduct, getProductDetail, getProductSearch } =
+export const { getSearch, getProduct, getProductDetail, getProductSearch, getProductPaging } =
   productReducer.actions;
 
 export default productReducer.reducer;
@@ -54,7 +58,7 @@ export const getProductDetailPagingApi = (pageIndex, pageSize) => {
     const result = await http.get(
       `/api/Product/getpaging?pageIndex=${pageIndex}&pageSize=${pageSize}`
     );
-    const actionProduct = getProduct(result.data.content.items);
+    const actionProduct = getProductPaging(result.data.content.items);
     dispatch(actionProduct);
   };
 };

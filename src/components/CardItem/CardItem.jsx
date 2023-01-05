@@ -24,7 +24,7 @@ const CardItem = ({ item }) => {
   };
   return (
     <div className="card">
-      <img
+      {/* <img
         className="px-5 pt-4 w-100"
         src={
           item.image.startsWith("https")
@@ -32,12 +32,12 @@ const CardItem = ({ item }) => {
             : `https://shop.cyberlearn.vn/images/${item.image}`
         }
         alt="..."
-      />
-      {/* <img
-        className="px-5 pt-4 w-100"
-        src={`https://shop.cyberlearn.vn/images/${item.image}`}
-        alt=""
       /> */}
+      <img
+        className="px-5 pt-4 w-100"
+        src={`https://shop.cyberlearn.vn/images/${item.alias}.png`}
+        alt=""
+      />
       <div
         className="heart-icon"
         onClick={() => {

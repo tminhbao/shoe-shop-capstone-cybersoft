@@ -10,10 +10,10 @@ import { ITEM_PER_PAGE } from "../../util/config";
 import { NavLink } from "react-router-dom";
 
 const ProductFeature = () => {
-  const { product } = useSelector((state) => state.productReducer);
+  const { productPaging } = useSelector((state) => state.productReducer);
   const [currentPage, setCurrentPage] = useState(1);
   const dispatch = useDispatch();
-  const totalPage = Number(Math.ceil(product?.length / ITEM_PER_PAGE));
+  const totalPage = Number(Math.ceil(productPaging?.length / ITEM_PER_PAGE));
 
   const getArrProductApi = async () => {
     dispatch(getProductApi());
@@ -35,7 +35,7 @@ const ProductFeature = () => {
       <h2 className="title ps-5 py-2 text-light">Product Feature</h2>
       <div className="container pt-5">
         <div className="row g-5">
-          {product?.map((item, i) => {
+          {productPaging?.map((item, i) => {
             return (
               <div className="col col-lg-4 col-md-6 col-sm-6 col-12" key={i}>
                 <CardItem item={item} />
