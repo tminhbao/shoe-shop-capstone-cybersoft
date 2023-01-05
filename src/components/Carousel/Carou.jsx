@@ -29,8 +29,6 @@ const Carou = () => {
     (item) => item.id === 1 || item.id === 2 || item.id === 3
   );
 
-  console.log("Carou", carousel);
-
   var settings = {
     dots: true,
     infinite: true,
@@ -44,7 +42,7 @@ const Carou = () => {
   return (
     <div>
       <Slider {...settings}>
-        {product?.map((item, i) => {
+        {carousel?.map((item, i) => {
           return (
             <div className="carousel" key={i}>
               <div className="px-4">

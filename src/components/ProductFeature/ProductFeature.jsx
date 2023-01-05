@@ -44,12 +44,23 @@ const ProductFeature = () => {
           })}
           <div class="center">
             <div class="pagination">
-              <NavLink>
+              <NavLink
+                onClick={(e) => {
+                  const action = getProductDetailPagingApi(
+                    currentPage - 1,
+                    ITEM_PER_PAGE
+                  );
+                  setCurrentPage(currentPage - 1);
+                  dispatch(action);
+                  handleClick(e);
+                }}
+              >
                 <span>&laquo;</span>
               </NavLink>
               <NavLink
                 onClick={(e) => {
                   const action = getProductDetailPagingApi(1, ITEM_PER_PAGE);
+                  setCurrentPage(1);
                   dispatch(action);
                   handleClick(e);
                 }}
@@ -59,6 +70,7 @@ const ProductFeature = () => {
               <NavLink
                 onClick={(e) => {
                   const action = getProductDetailPagingApi(2, ITEM_PER_PAGE);
+                  setCurrentPage(2);
                   dispatch(action);
                   handleClick(e);
                 }}
@@ -68,13 +80,24 @@ const ProductFeature = () => {
               <NavLink
                 onClick={(e) => {
                   const action = getProductDetailPagingApi(3, ITEM_PER_PAGE);
+                  setCurrentPage(3);
                   dispatch(action);
                   handleClick(e);
                 }}
               >
                 <span className="paging">3</span>
               </NavLink>
-              <NavLink>
+              <NavLink
+                onClick={(e) => {
+                  const action = getProductDetailPagingApi(
+                    currentPage + 1,
+                    ITEM_PER_PAGE
+                  );
+                  setCurrentPage(currentPage + 1);
+                  dispatch(action);
+                  handleClick(e);
+                }}
+              >
                 <span>&raquo;</span>
               </NavLink>
             </div>
