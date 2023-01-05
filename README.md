@@ -10,9 +10,27 @@
 - Xây dựng và reponsive các trang login, register, profile và carts.
 - Xây dụng userReducer.
 
+## Function
+- Hiển thị danh sách sản phẩm
+- Phân trang sản phẩm
+- Xem chi tiết sản phẩm
+- Tìm kiếm sản phẩm theo tên và sắp xếp theo giá tăng dần, giảm dần
+- Đăng nhập
+- Đăng nhập bằng Facebook
+- Đăng ký
+- Thay đổi thông tin người dùng
+- Thay đổi mật khẩu
+- Thêm sản phẩm vào giỏ hàng
+- Submit Order
+- Yêu thích sản phẩm
+- Thay đổi số lượng sản phẩm trong giỏ hàng
+- Submit Order
+- Xem Order History
+- Xem Favorite List
+
 ## Installed Packages
 - UI: sass, bootstrap, google fonts
 
-## [Video Demo]()
+## [Video Demo](https://youtu.be/MPkeOyYuA54)
 
-## [Link Deploy]()
+## [Link Deploy](https://shoe-shop-capstone-fe73.surge.sh/)
